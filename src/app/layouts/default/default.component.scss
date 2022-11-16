@@ -1,0 +1,12 @@
+// 16.0 ustawiam style dla flexLayoutu
+:host {
+    display: flex; // 16.1 bez tego flexLayout nie zadziała
+    flex-direction: column; // 16.2 wyznacza kierunek layoutu na kolumnowy
+    width: 1500px;
+    height: 100%;
+    margin: 0 auto;
+}
+// 17.1 dodaję padding dla części środkowej layoutu:
+.content{
+    padding: 20px;
+}

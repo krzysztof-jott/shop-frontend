@@ -1,0 +1,14 @@
+<!--18.0 ustawia Logo w tym samym wierszu co buttony i po lewej stronie (start - początek czyli lewa strona w poziomie, center
+wyśrodkowuje w pionie:-->
+<header fxLayoutAlign="start center">
+<!--        18.1 ustawiam logo po lewej, a buttony po prawej (rozciąga logo na całą długość i spycha buttony na prawo):-->
+        <div fxFlex>
+                Logo
+        </div>
+        <div>
+                <!--                8.0 żeby guzik zadziałał i przełączał strony musi mieć routerLink:-->
+                <button routerLink="">Strona główna</button>
+                <button routerLink="/products">Produkty</button>
+                <button routerLink="/login">Zaloguj</button>
+        </div>
+</header>

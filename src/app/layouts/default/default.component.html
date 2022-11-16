@@ -1,0 +1,35 @@
+<!--14.0 przenoszę do header.component.html i zastępuję app-header-->
+<!--<header>
+        <div>
+                Logo
+        </div>
+        <div>
+                8.0 żeby guzik zadziałał i przełączał strony musi mieć routerLink:
+                <button routerLink="">Strona główna</button>
+                <button routerLink="/products">Produkty</button>
+                <button routerLink="/login">Zaloguj</button>
+        </div>
+</header>-->
+<app-header fxLayout="column"></app-header>
+
+<!--część centralna-->
+<div fxLayout="row">
+<!--        14.1 przenoszę do sidebar.component.html i zastępuję app-sidebar (zostawiam div dla spójności z divem poniżej:-->
+        <!--<div>
+                sidebar
+        </div>-->
+        <div fxFlex="20">
+                <app-sidebar fxFlex></app-sidebar>
+        </div>
+<!--        17.0 dodaję klasę i nazywam ją "content" i opisuję w stylach default.component.scss:-->
+        <div fxFlex="80" class="content">
+        <router-outlet></router-outlet>
+        </div>
+</div>
+
+<!--12.0 przenoszę footer do footer.component.html:-->
+<!--<footer>
+        footer
+</footer>-->
+<!--12.1 zamiast tego dodaję app-footer:-->
+<app-footer fxLayout="column"></app-footer>
