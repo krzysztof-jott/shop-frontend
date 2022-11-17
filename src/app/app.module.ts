@@ -4,10 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {DefaultModule} from "./layouts/default/default.module";
 import {FullpageModule} from "./layouts/fullpage/fullpage.module";
+import {FullpageadminModule} from "./layouts/fullpageadmin/fullpageadmin.module";
 
 @NgModule({
   declarations: [
     AppComponent,
+    /* 22.0 usuwam:
+    FullpageadminComponent,
+    AdminComponent,*/
+
     // LoginComponent, 20.0 usuwam
 
     /* 19.0 usuwam:
@@ -27,7 +32,8 @@ import {FullpageModule} from "./layouts/fullpage/fullpage.module";
     BrowserModule,
     AppRoutingModule,
     DefaultModule,
-    FullpageModule
+    FullpageModule,
+    FullpageadminModule
   ],
   providers: [],
   bootstrap: [AppComponent]

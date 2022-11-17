@@ -5,6 +5,8 @@ import {HomeComponent} from "./modules/home/home.component";
 import {ProductComponent} from "./modules/product/product.component";
 import {FullpageComponent} from "./layouts/fullpage/fullpage.component";
 import {LoginComponent} from "./modules/login/login.component";
+import {FullpageadminComponent} from "./layouts/fullpageadmin/fullpageadmin.component";
+import {AdminComponent} from "./modules/admin/admin.component";
 
 // 6.0 ten moduł odpowiada za ścieżki aplikacji
 const routes: Routes = [
@@ -18,6 +20,12 @@ const routes: Routes = [
   {
     path: '', component: FullpageComponent, children: [
       {path: 'login', component: LoginComponent}
+    ]
+  },
+    // 23.6 dodaję routing dla panelu administracyjnego:
+  {
+    path: '', component: FullpageadminComponent, children: [
+      {path: 'admin', component: AdminComponent}
     ]
   }
 ];
