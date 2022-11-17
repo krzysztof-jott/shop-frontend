@@ -1,0 +1,11 @@
+// 21.0 skopiwałem styl z domyslnego layoutu:
+:host {
+    display: flex; // 16.1 bez tego flexLayout nie zadziała
+    flex-direction: column; // 16.2 wyznacza kierunek layoutu na kolumnowy
+    width: 1500px;
+    height: 100%;
+    margin: 0 auto;
+}
+.content{
+    padding: 20px;
+}

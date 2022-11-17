@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import {DefaultComponent} from "./default.component";
 import {ProductComponent} from "../../modules/product/product.component";
 import {HomeComponent} from "../../modules/home/home.component";
-import {RouterLink, RouterOutlet} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
-import {FlexModule} from "@angular/flex-layout";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -15,11 +15,10 @@ import {FlexModule} from "@angular/flex-layout";
   ],
     imports: [
         CommonModule,
-        RouterOutlet,
-        RouterLink,
+        RouterModule,
         // 12.2 żeby tag "app-footer" się wyświetlał, trzeba zaimportować moduł shared do modułu domyślnego layoutu:
         SharedModule,
-        FlexModule
+        FlexLayoutModule
     ]
 })
 export class DefaultModule { }

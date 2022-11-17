@@ -4,7 +4,7 @@ import {HeaderComponent} from "./components/header/header.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {FooterComponent} from "./components/footer/footer.component";
 import {RouterLink} from "@angular/router";
-import {FlexModule} from "@angular/flex-layout";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {FlexModule} from "@angular/flex-layout";
     imports: [
         CommonModule,
         RouterLink,
-        FlexModule
+        FlexLayoutModule
     ],
   exports: [
     HeaderComponent,
