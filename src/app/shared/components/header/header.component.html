@@ -2,13 +2,22 @@
 wyśrodkowuje w pionie:-->
 <header fxLayoutAlign="start center">
 <!--        18.1 ustawiam logo po lewej, a buttony po prawej (rozciąga logo na całą długość i spycha buttony na prawo):-->
-        <div fxFlex>
-                Logo
+<!--        24.3 dodaję wyrównanie w jednej linii poziomo ikony i nazwy i odstęp pomiędzy nimi-->
+        <div fxFlex fxLayoutAlign="start end" fxLayoutGap="15">
+<!--                24.4 dodaję klasę logoicon-->
+                <mat-icon color="warn" class="logoicon">store</mat-icon>
+<!--                24.2 nadaję klasę i ustawiam zmienną title dla logo zamiast napisu Logo na sztywno (trzeba ją dodać do komponentu :-->
+                <span class="logo">{{title}}</span>
         </div>
-        <div>
+<!--        24.0 dodaję odstępy pomiędzy guzikami:-->
+        <div fxLayoutGap="15" fxLayoutAlign="start center">
                 <!--                8.0 żeby guzik zadziałał i przełączał strony musi mieć routerLink:-->
-                <button routerLink="">Strona główna</button>
-                <button routerLink="/products">Produkty</button>
-                <button routerLink="/login">Zaloguj</button>
+                <button mat-flat-button routerLink="">Strona główna</button>
+                <button mat-flat-button routerLink="/products">Produkty</button>
+<!--                24.1 dodaję span, żeby odsunąć trochę guzik zaloguj od reszty:-->
+                <span></span>
+                <button mat-flat-button color="primary" routerLink="/login">Zaloguj</button>
+<!--                24.5 dodaję klasę shoppingCart:-->
+                <mat-icon color="warn" class="shoppingBasket">shopping_basket</mat-icon>
         </div>
 </header>

@@ -1,5 +1,19 @@
 // 15.1 pseudoklasa host odnosi się do komponentu header.component.html:
+// 26.1 dodaję import zmiennych z kolorami:
+@import "../../../../variables";
 :host {
-    background: #dddddd;
+    // 26.2 dodaję zmienną zamiast kolor na sztywno:
+    background: $darkgray;
+    /*
+    background: #292b31; // 25.2 zmieniam kolor
+    */
     padding: 20px;
+}
+// 25.0
+.logo {
+    font-size: 22px;
+    color: white; // 25.3 dodaję kolor
+}
+.logoicon,.shoppingBasket {
+    font-size: 25px;
 }

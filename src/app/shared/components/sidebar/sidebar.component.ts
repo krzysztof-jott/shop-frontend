@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  // 27.4 dodaję tablicę kategorii:
+  categories = ['Kategoria 1', 'Kategoria 2', 'Kategoria 3', 'Kategoria 4', 'Kategoria 5'];
+
   constructor() { }
 
   ngOnInit(): void {

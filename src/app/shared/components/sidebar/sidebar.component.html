@@ -1,3 +1,7 @@
-<div>
-        sidebar
-</div>
+<!-- 27.2 dodaję mat-list i żeby usunąć opcję odchaczania pół dodaję [multiple]:-->
+<mat-selection-list [multiple]="false">
+<!--        27.3 categories - tablica kategorii:-->
+        <mat-list-option *ngFor="let category of categories">
+                {{category}}
+        </mat-list-option>
+</mat-selection-list>
