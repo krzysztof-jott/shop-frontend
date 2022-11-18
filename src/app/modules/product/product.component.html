@@ -1,1 +1,31 @@
-<p>product works!</p>
+<h1>Produkty</h1>
+<!--29.1 dodaję pętlę, żeby wyświetlić produkty z tablicy products, niżej posługuję się już zmienną lokalną product zamiast sztywnych nazw:-->
+<mat-card *ngFor="let product of products">
+<!--        28.6 dodaję nowego diva z flexem:-->
+        <div fxLayout="row">
+<!--                28.7 dodaję kolejnego diva z flexem:-->
+                <div fxLayout="column" fxFlex>
+<!--                        29.2 zamiast nazw na sztywno zamieniam je na zmienne z product:-->
+                        <mat-card-title>{{product.name}}</mat-card-title>
+                        <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+<!--                        28.8 ustawiam, żeby obrazek i opis były obok siebie i żeby opis wypełniał przestrzeń:-->
+                        <div fxLayout="row">
+<!--                                28.10 dodaję klase productImage i ustawiam w stylach odsunięcie opisu od obrazka:-->
+                                <img src="assets/image-placeholder.png" mat-card-lg-image class="productImage">
+                                <mat-card-content fxFlex class="productContent">{{product.description}}</mat-card-content>
+                        </div>
+                </div>
+                <!--        28.5 dodaję diva na cenę:-->
+                <div>
+<!--                        28.12 dodaję klasę i ostylowuję cenę:-->
+                        <div class="productPrice">{{product.price}} {{product.currency}}</div>
+                </div>
+        </div>
+<!--        28.9 przerzucam guziki na prawo i dodaję im stylowanie flat z kolorem i odstępy:-->
+        <mat-card-actions align="end" fxLayoutGap="10">
+                <button mat-flat-button color="warn">Pokaż</button>
+                <button mat-flat-button color="accent">Do koszyka</button>
+        </mat-card-actions>
+</mat-card>
+
+

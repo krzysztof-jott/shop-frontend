@@ -1,8 +1,14 @@
 // 15.0 resetowanie styli:
+// 28.3 dodaję import:
+@import "variables";
 body,
 html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.content{
+    padding: 20px;
+    background: $lightgray; // 28.0 zmieniam kolor tła
 }

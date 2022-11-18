@@ -1,0 +1,25 @@
+@import "../../../variables";
+// 28.6 dodaję klasę i nadaję temu kontenerowi style, żeby flex zadziałał:
+:host {
+    display: flex;
+    flex-direction: column;
+}
+// 28.11 style dla klasy:
+.productImage {
+    margin-right: 10px;
+}
+// 28.13 styl dla klasy:
+.productPrice{
+    font-size: 20px; // powiększam czcionkę
+    font-weight: 500; // zwiększam grubość czcionki
+    margin-top: 20px;
+    color: $warn;
+}
+// 28.14 zwiększam czcionę opisu
+.productContent{
+    font-size: 18px;
+}
+// 29.3 dodaję odstępy pomiędzy wyswietanymi produktami:
+mat-card {
+    margin-bottom: 15px;
+}

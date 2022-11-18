@@ -1,8 +1,8 @@
 <!--19.3 kopiuję szablon z domyślnego i usuwam sidebar:-->
 <app-header fxLayout="column"></app-header>
 <!--19.4 zmieniam "row" na "column":-->
-<div fxLayout="column">
-        <div fxFlex="80" class="content">
+<div fxLayout="column" fxFlex>
+        <div class="content" fxFlex>
                 <router-outlet></router-outlet>
         </div>
 </div>
