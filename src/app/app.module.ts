@@ -6,6 +6,7 @@ import {DefaultModule} from "./layouts/default/default.module";
 import {FullpageModule} from "./layouts/fullpage/fullpage.module";
 import {FullpageadminModule} from "./layouts/fullpageadmin/fullpageadmin.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DefaultModule,
     FullpageModule,
     FullpageadminModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule // nie wyświetla się lista produktów bez tego
   ],
   providers: [],
   bootstrap: [AppComponent]

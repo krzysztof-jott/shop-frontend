@@ -47,7 +47,11 @@ export class ProductComponent implements OnInit {
 
 // 30.1 tworzę metodę tak, żeby komponent pobierał dane z metody serwisowej, a nie bezpośrednio stąd:
   getProducts() { // trzeba wstrzyknąć serwis ProductSerirvice przez konstruktor, żeby poniżej było dostępne product.service:
-    this.products = this.productService.getProducts(); // pobrane produkty z serwisu
+    // 33.3 kiedy dodam kropkę po metodzie, pojawi się metoda forEach, która będzie iterować po Observable. Metoda pipe zwraca observable,
+    // który pozwala na użycie dodatkowych operatorów jak filter czy map.Subscribe dla lambdy
+    // 33.4 usuwam część przed równa się:
+    /*this.products = */this.productService.getProducts()
+        .subscribe(products => this.products = products); // pobrane produkty z serwisu
   }
 
 }
