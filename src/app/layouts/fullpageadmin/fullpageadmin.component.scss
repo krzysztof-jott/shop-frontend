@@ -1,21 +1,21 @@
-// 23.8 kopiuję style domyślnego layoutu:
 :host {
     display: flex; // 16.1 bez tego flexLayout nie zadziała
     flex-direction: column; // 16.2 wyznacza kierunek layoutu na kolumnowy
-    //width: 1500px; 23.9 usuwam ograniczenie szerokości i środkowanie poniżej (margin)
     height: 100%;
-    //margin: 0 auto;
 }
-// 17.1 dodaję padding dla części środkowej layoutu:
 .content {
     padding: 20px;
+    background: #f9f9f9;
 }
-// 23.9 dodaję styl do headera:
 header {
-    background: #dddddd;
+    background: #292b31;
     padding: 20px;
+    color: #ffffff;
 }
 .sidebar { // 23.10 dodaję klasę sidebar do diva w fullpageadmin.component.html
-    background: #bbbbbb;
+    background: #292b31;
     padding: 20px;
+    a{
+        color: #ffffff;
+    }
 }

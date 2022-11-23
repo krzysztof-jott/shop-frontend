@@ -2,48 +2,20 @@ import { Injectable } from '@angular/core';
 import {Product} from "./model/product";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Page} from "../../shared/model/page";
 
 @Injectable({ // dekorator oznacza, że można ten serwis wstrzykiwać w dowolne miejsce
   providedIn: 'root'
 })
 export class ProductService {
 
-  // 33.0 wstrzykuję klienta http:
   constructor(private http: HttpClient) {
 
   }
-
-  // 30.0 tworzę metodę:
-  // 30.4 zwracam tablicę product
-  // 33.2 zmieniam typ na Observable i przechodzę do komponentu:
-  getProducts(): Observable<Product[]> {
-    // 34.0 poprawiam urla po zrobieniu przekierowania (zamiast localhost daję api):
-    return this.http.get<Product[]>("/api/products") // parametr generyczny mówi metodzie, że dane, które będą przychodziły z jakiejś usługi będzie trzeba
-    // skonwertować do tego obiektu. Trzeba podać urla, z którego będą pobierane dane
-
-    // 33.1 usuwam i zastępuję tym co powyżej:
-    // return [ // wklejam produkty z tablicy
-    //   {
-    //     name: "Produkt 1",
-    //     category: "Kategoria 1",
-    //     description: "Opis produktu1",
-    //     price: 3,
-    //     currency: "PLN"
-    //   },
-    //   {
-    //     name: "Produkt 2",
-    //     category: "Kategoria 2",
-    //     description: "Opis produktu2",
-    //     price: 3,
-    //     currency: "PLN"
-    //   },
-    //   {
-    //     name: "Produkt 3",
-    //     category: "Kategoria 3",
-    //     description: "Opis produktu3",
-    //     price: 3,
-    //     currency: "PLN"
-    //   },
-    // ];
+  getProducts(page: number, size: number): Observable<Page<Product>> { // 7.9 dodaję parametry do metody getProducts
+    // 7.10 korzystam z interpolacji stringa (dodawanie parametrów w nawiasie klamrowym po dolarze) - zamieniam cudzysłów na apostrof
+    // ten pod tyldą w urlu i po ? dodaję parametry:
+    // DOPIERO TERAZ ZMIENIAJĄ SIĘ STRONY:
+    return this.http.get<Page<Product>>(`/api/products?page=${page}&size=${size}`); // parametr generyczny mówi metodzie, że dane, które będą przychodziły z jakiejś usługi będzie trzeba
   }
 }

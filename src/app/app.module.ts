@@ -10,25 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    /* 22.0 usuwam:
-    FullpageadminComponent,
-    AdminComponent,*/
-
-    // LoginComponent, 20.0 usuwam
-
-    /* 19.0 usuwam:
-    FullpageComponent*/
-
-    /* 13.0 usuwam:
-    HeaderComponent,
-    SidebarComponent,
-    FooterComponent*/
-
-    /* 3.0 usuwam:
-    DefaultComponent,
-    ProductComponent,
-    HomeComponent*/
+    AppComponent
   ],
   imports: [
     BrowserModule,

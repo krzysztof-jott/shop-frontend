@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from "./product.service";
 import {Product} from "./model/product";
+import {Page} from "../../shared/model/page";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-product',
@@ -9,49 +11,35 @@ import {Product} from "./model/product";
 })
 export class ProductComponent implements OnInit {
 
-  // 29.0 dodaję tablicę z produktami:
-  // 30.3 usuwam produkty, zostawiam pustą tablicę products i muszę proprawić błąd (nie zgadza się typ danych), który teraz wyskoczył w metodzie getProducts:
-  // dodaję typ any, żeby nie było błędów zgodności:
-  // 30.5 zamianiem any[] na Product[]
-  products: Product[] = [];
-  /*products = [
-    {
-      name: "Produkt 1",
-      category: "Kategoria 1",
-      description: "Opis produktu1",
-      price: "3",
-      currency: "PLN"
-    },
-    {
-      name: "Produkt 2",
-      category: "Kategoria 2",
-      description: "Opis produktu2",
-      price: "3",
-      currency: "PLN"
-    },
-    {
-      name: "Produkt 3",
-      category: "Kategoria 3",
-      description: "Opis produktu3",
-      price: "3",
-      currency: "PLN"
-    },
-  ];*/
-  // 30.2 w TypeScripcie jeśli wpiszemy w konstruktorze pole typu ProductService, to TypeScript powinien stworzyć pole dla tego serwisu:
+//  6.4 usuwam:
+/*  products: Product[] = [];
+  totalElements: number = 0;*/
+  page!: Page<Product>; // ! operator TypeScriptu, pozwala użyć pola/zmiennych, które nie zostały jeszcze zainicjalizowane
+
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    // 30.6 wywołuję metodę getProducts:
-    this.getProducts(); // teraz wypełni się pole product danymi z serwisu
+    this.getProducts();
   }
 
-// 30.1 tworzę metodę tak, żeby komponent pobierał dane z metody serwisowej, a nie bezpośrednio stąd:
-  getProducts() { // trzeba wstrzyknąć serwis ProductSerirvice przez konstruktor, żeby poniżej było dostępne product.service:
-    // 33.3 kiedy dodam kropkę po metodzie, pojawi się metoda forEach, która będzie iterować po Observable. Metoda pipe zwraca observable,
-    // który pozwala na użycie dodatkowych operatorów jak filter czy map.Subscribe dla lambdy
-    // 33.4 usuwam część przed równa się:
-    /*this.products = */this.productService.getProducts()
-        .subscribe(products => this.products = products); // pobrane produkty z serwisu
-  }
+  getProducts() { // 6.3 zmianiam całą lambdę po dodaniu page! wyżej
+    this.getProductPage(0,10); // 7.5 parametry z metody getProductPage
 
+        /*.subscribe(products => {
+          this.products = products.content;
+          this.totalElements = products.totalElements; // 6.1 po dodaniu totalElements zmieniam lambde, dodaję to
+        });*/
+  }
+// 7.3 tworzę motodę onPageEvent:
+
+  onPageEvent(event: PageEvent) {
+    // 7.6 usuwam alert i wywołuję metodę getProductPage, ale z parametrami z eventem:
+    // alert(event.pageIndex)
+    this.getProductPage(event.pageIndex, event.pageSize); // 7.7 trzeba je teraz przekazać do metody getProducts
+  }
+// 7.4 wyekstrachowałem metodę z metody getProducts i dodaję do niej 2 parametry page i size:
+  private getProductPage(page: number, size: number) { // 7.8 przekazuję parametry do metody getProducts i przechodzę do serwisu:
+    this.productService.getProducts(page, size)
+        .subscribe(page => this.page = page);
+  }
 }

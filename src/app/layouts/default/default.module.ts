@@ -7,6 +7,7 @@ import {RouterModule} from "@angular/router";
 import {SharedModule} from "../../shared/shared.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatCardModule} from "@angular/material/card";
         // 12.2 żeby tag "app-footer" się wyświetlał, trzeba zaimportować moduł shared do modułu domyślnego layoutu:
         SharedModule,
         FlexLayoutModule,
-        MatCardModule
+        MatCardModule,
+        MatPaginatorModule
     ]
 })
 export class DefaultModule { }

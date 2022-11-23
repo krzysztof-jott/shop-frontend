@@ -1,6 +1,3 @@
-// 16.0 ustawiam style dla flexLayoutu
-// 28.2 usuwam import:
-//@import "../../../variables";
 :host {
     display: flex; // 16.1 bez tego flexLayout nie zadziała
     flex-direction: column; // 16.2 wyznacza kierunek layoutu na kolumnowy
@@ -8,10 +5,3 @@
     height: 100%;
     margin: 0 auto;
 }
-// 17.1 dodaję padding dla części środkowej layoutu:
-// 28.1 przenoszę klasę content do styli globalnych:
-/*
-.content{
-    padding: 20px;
-    background: $lightgray; // 28.0 zmieniam kolor tła
-}*/
