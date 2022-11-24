@@ -1,0 +1,30 @@
+<!--9.0 dodaję nagłówek. Będzie wyświwetlac tabele z listą produktów:-->
+<h1>Lista produktów</h1>
+<!--9.1 kopiuję tabelę z Angular Material:-->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Cena </th>
+                <td mat-cell *matCellDef="let element"> {{element.price}} {{element.currency}}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<!--15.0 dodaję paginator z AM i dodaję pageSize:-->
+<!--15.7 dodaję pole lenght: nawiasy [] bo to wejściowe-->
+<mat-paginator
+            [pageSizeOptions]="[25, 50, 100]"
+            [pageSize]="25"
+            [length]="totalElements"
+            showFirstLastButtons>
+</mat-paginator>

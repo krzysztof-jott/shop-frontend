@@ -7,25 +7,28 @@ import {FullpageComponent} from "./layouts/fullpage/fullpage.component";
 import {LoginComponent} from "./modules/login/login.component";
 import {FullpageadminComponent} from "./layouts/fullpageadmin/fullpageadmin.component";
 import {AdminComponent} from "./modules/admin/admin.component";
+import {AdminProductsComponent} from "./modules/admin/admin-product/admin-product.component";
 
 // 6.0 ten moduł odpowiada za ścieżki aplikacji
 const routes: Routes = [
   {
-    path: '', component: DefaultComponent, children: [ // 6.1 children będą korzystać z domyślnego komponentu
-      {path: '', component: HomeComponent}, // 6.2 konfiguruję stronę główną (pusta ścieżka dla niej)
+    path: '', component: DefaultComponent, children: [
+      {path: '', component: HomeComponent},
       {path: 'products', component: ProductComponent}
     ]
   },
-    // 20.2 dodaję konfigurację dla podstrony do logowania:
+
   {
     path: '', component: FullpageComponent, children: [
       {path: 'login', component: LoginComponent}
     ]
   },
-    // 23.6 dodaję routing dla panelu administracyjnego:
+
   {
     path: '', component: FullpageadminComponent, children: [
-      {path: 'admin', component: AdminComponent}
+      {path: 'admin', component: AdminComponent},
+      // 8.0 dodaję routing:
+      {path: 'admin/products', component: AdminProductsComponent}
     ]
   }
 ];
