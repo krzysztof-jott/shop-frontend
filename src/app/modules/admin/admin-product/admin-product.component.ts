@@ -16,7 +16,7 @@ export class AdminProductsComponent implements AfterViewInit { // 15.3 dodałem 
   // 15.1 dodaję konfigurację, która połączy dataSource z paginatorem:
   // dataSource: AdminProduct[] = []; 15.2 usuwam
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ["id", "name", "price"]; // currency wyświetli się w tym samym polu co price, nie trzeba tu dodawać
+  displayedColumns: string[] = ["id", "name", "price", "actions"]; // currency wyświetli się w tym samym polu co price, nie trzeba tu dodawać
   totalElements: number = 0; // 15.8
   dataSource: AdminProduct[] = [];
 
