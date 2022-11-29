@@ -1,0 +1,18 @@
+<!--42.6 komunikat i guziki do zatwierdzania i anulowania:-->
+<div fxLayout="column" fxLayoutGap="50px">
+<!--		42.7 wyświetla komunikat:-->
+		<div fxLayout="row">
+<!--				45.0 wyciam komunikat "Czy na pewno chcesz usunąć produkt?" i zamienie na zmienną:-->
+<!--				45.4 dodaję do message "data."-->
+				<span fxFlex>{{data.message}}</span>
+<!--				43.0 dodaję dyrektywy guzikom (false dla anuluj itp, true dla zatwierdź):-->
+				<button mat-icon-button class="closeButton" [mat-dialog-close]="false">
+						<mat-icon>close</mat-icon>
+				</button>
+		</div>
+<!--		42.8 wyswietla guziki-->
+		<div fxFlex>
+				<button mat-raised-button fxFlex [mat-dialog-close]="false">Anuluj</button>
+				<button mat-raised-button fxFlex color="warn" [mat-dialog-close]="true">Potwierdź</button>
+		</div>
+</div>

@@ -3,6 +3,8 @@ import {AdminProductService} from "./admin-product.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {startWith, switchMap} from "rxjs";
 import {AdminProduct} from "./adminProduct";
+import {AdminConfirmDialogService} from "../admin-confirm-dialog.service";
+import {MatTable} from "@angular/material/table";
 
 @Component({
   selector: 'app-admin-products',
@@ -16,12 +18,17 @@ export class AdminProductsComponent implements AfterViewInit { // 15.3 dodałem 
   // 15.1 dodaję konfigurację, która połączy dataSource z paginatorem:
   // dataSource: AdminProduct[] = []; 15.2 usuwam
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // 43.9 dodaję referencję:
+        @ViewChild(MatTable) table!: MatTable<any>;
   displayedColumns: string[] = ["id", "name", "price", "actions"]; // currency wyświetli się w tym samym polu co price, nie trzeba tu dodawać
   totalElements: number = 0; // 15.8
   dataSource: AdminProduct[] = [];
 
   // 14.2 wstrzykuję serwis:
-  constructor(private adminProductService: AdminProductService) { }
+  constructor(private adminProductService: AdminProductService,
+              // 42.5 wstrzykuję serwis:
+              private dialogService: AdminConfirmDialogService
+  ) { }
 
   // 14.4 uruchamiam jeszcze tu:
   // 15.5 usuwam tę metodę, wszystko będzie teraz w After:
@@ -54,4 +61,37 @@ export class AdminProductsComponent implements AfterViewInit { // 15.3 dodałem 
     this.adminProductService.getProducts(0, 25)
         .subscribe(page => this.dataSource = page.content) // bez subscribe nie ruszy. Uruchamiam metodę w OnInit
   }*/
+  // 42.4 tworzę metodę:
+  // 43.9 zmieniam (id: number) na:
+        confirmDelete(element: AdminProduct) {
+  // confirmDelete(id: number) {
+    this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć produkt?")
+    // 43.2 dodaję co się stanie po zamknięciu okna:
+        .afterClosed()
+        // 43.3 muszę się zasubskrybować na Obserwejbla. Dostanę wynik z okna dialogowego true albo false:
+        .subscribe(result => {
+          if (result) {
+            this.adminProductService.delete(element.id) // z elementu wyciągam id
+            // 43.6 subsktybuję się:
+                    .subscribe(() => { // 43.7 żeby zaktualizować listę po usunięciu danego produktu, muszę ziterować
+                      // po tablicy danych tabeli (mam komponent tabeli, który ma dane i te dane trzeba tak zaktualizować,
+                            // żeby się zaktualizował komponent stronicowania):
+                      this.dataSource.forEach((value, index) => { // watość elementu i indeks elementu z tablicy
+                              // muszę przyrównać element do value:
+                              if (element == value) { // element, który mam, przyrównuję do każdego kolejnego elementu
+                                      // w iteracjach i jeśli to ten sam element to muszę usunąć z dataSource:
+                                      this.dataSource.splice(index, 1) // 1 - ilość elementów do usunięcia
+                                      // 43.8 żeby widok był widoczny muszę zrenderować całą tabelę - potrzebuję referencji do tabeli.
+// dodaję te referencję u góry
+                                      // 43.10 teraz mogę użyć tej tabeli tu:
+                                      this.table.renderRows(); // jeśli usuwamy dane z tablicy, trzeba zrobić renderowanie wierszy
+                                      // tabeli. Dzięku temu zrenderuje się też komponent stronicowania.
+                              }
+                      })
+                    })
+            ;
+          }
+        })
+    ;
+  }
 }

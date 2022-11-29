@@ -24,11 +24,15 @@
                 <td mat-cell *matCellDef="let element">
 <!--                        19.1 dodaję akcję przekierowania guzika. W linku przekazuję id elementu, który chcę edytować:-->
                         <button mat-icon-button [routerLink]="['/admin/products/update', element.id]">
-                                <mat-icon color="warn"> edit </mat-icon>
+                                <mat-icon color="accent"> edit </mat-icon>
+                        </button>
+<!--   42.3 dodaję guzik do usuwania produktów:                  -->
+<!--                        43.8 zmieniam (element.id) na sam (element):-->
+                        <button mat-icon-button (click)="confirmDelete(element)">
+                                <mat-icon color="warn"> delete </mat-icon>
                         </button>
                 </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
