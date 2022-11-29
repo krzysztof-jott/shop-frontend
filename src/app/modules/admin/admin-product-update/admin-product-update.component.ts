@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AdminProductUpdateService} from "./admin-product-update.service";
 import {AdminProductUpdate} from "./model/adminProductUpdate";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AdminMessageService} from "../admin-message.service";
 
 @Component({
   selector: 'app-admin-product-update',
@@ -17,22 +18,27 @@ export class AdminProductUpdateComponent implements OnInit {
 
   // 22.0 tu wstrzykuję router. Będę teraz mógł pobrać id z urla:
   // 23.5 wstrzykuję serwis w komponencie:
-  constructor(private router: ActivatedRoute,
-              private adminProductUpdateService: AdminProductUpdateService,
-              // 24.3 trzeba zainicjalizować formularz, korzystam z FormBuilder i wstrzykuję tu:
-              private formBuilder: FormBuilder,
-              // 25.0 wstrzykuję do komponentu obiekt Snackbar i idę do metody submit:
-              private snackBar: MatSnackBar) { }
+
+    constructor(private router: ActivatedRoute,
+                private adminProductUpdateService: AdminProductUpdateService,
+                // 24.3 trzeba zainicjalizować formularz, korzystam z FormBuilder i wstrzykuję tu:
+                private formBuilder: FormBuilder,
+                // 25.0 wstrzykuję do komponentu obiekt Snackbar i idę do metody submit:
+                private snackBar: MatSnackBar,
+                // 37. 1 wstrzykuję serwis
+                private adminMessageService: AdminMessageService
+    ) { }
 
   ngOnInit(): void { // 23.7 i teraz muszę tę metodą wywołać tutaj:
     this.getProduct();
     // 24.4 żeby zainicjować formularz dodaję tu:
     this.productForm = this.formBuilder.group({ // dodaję obiekt, wypisuję pola, które są w formularzu:
-      name: [''], // tablica konfiguracyjna, pierwsza wartość to zawsze wartość domyślna (tutaj puste pole)
-      description: [''],
-      category: [''],
-      price: [''],
-      currency: ['PLN']
+        //38.2 dodaję walidatory:
+      name: ['', [Validators.required, Validators.minLength(4)]], // tablica konfiguracyjna, pierwsza wartość to zawsze wartość domyślna (tutaj puste pole)
+      description: ['', [Validators.required, Validators.minLength(4)]],
+      category: ['', [Validators.required, Validators.minLength(4)]],
+      price: ['', [Validators.required, Validators.min(0)]],
+      currency: ['PLN', Validators.required]
     })
   }
 
@@ -77,11 +83,16 @@ export class AdminProductUpdateComponent implements OnInit {
         } as AdminProductUpdate) // 24.15 rzutowanie w TypeScripcie, czyli ten obiekt anonimowy, który tu tworzę będzie
             // typu AdminProductUpdate. Zostają wtedy zachowane typy i mam przekonwertowany obiekt. Przechodzę do serwisu.
             // 24.18 znowu dodaję tu jakieś gówno:
-            .subscribe(product => { // 25.1 dodaję Snackbara:
-                this.mapFormValues(product); // 24.19 teraz gdy zmienią produkt w formularzu, to zapisze się na backendzie w bazie danych. Backend zwróci mi
-                // zmieniony obiekt. Po co to robić? Nie mam pewności, że dane zostaną zapisane przez usługę w taki sam sposób w jaki
-                // je wprowadziłem
-                this.snackBar.open("Produkt został zapisany", '', {duration: 3000}); // 3 sekundy się wyświetla
+            // 37.0 poprawiam metodę subscribe():
+            .subscribe({
+                next: product => {
+                    // .subscribe(product => { // 25.1 dodaję Snackbara:
+                    this.mapFormValues(product); // 24.19 teraz gdy zmienią produkt w formularzu, to zapisze się na backendzie w bazie danych. Backend zwróci mi
+                    // zmieniony obiekt. Po co to robić? Nie mam pewności, że dane zostaną zapisane przez usługę w taki sam sposób w jaki
+                    // je wprowadziłem
+                    this.snackBar.open("Produkt został zapisany", '', {duration: 3000}); // 3 sekundy się wyświetla
+                },
+                error: err => this.adminMessageService.addSpringErrors(err.error)
             });
         }
         // 24.20 to co się duplikuje tu w kodzie wydzielam do metody prywatnej (tylko część związana z mapowaniem, bez lambdy):
