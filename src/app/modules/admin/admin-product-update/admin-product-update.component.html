@@ -41,3 +41,15 @@
                 <button mat-flat-button color="warn">Zapisz</button>
         </div>-->
 </form>
+<!--9.13UP dodaję dyrektywę, żeby wyświetlał się tylko jak jest obraz. Trzeba skleić w źródle image ze ścieżką, w formularzu
+skleić nazwę ze ścieżką trzeba użyć konkatenacji:-->
+<img *ngIf="image" src="{{'/api/data/productImage/' + image}}" width="200">
+<!--9.14UP żeby wyświetlania obrazu zadziałało, trzeba mieć usługę z takim urlem jak powyżej, więc dodaję ją na backenedzie-->
+
+<!--5.0UP dodaję kolejny formularz, który załaduje obraz:-->
+<form [formGroup]="imageForm" (submit)="uploadFile()">
+<!--        5.1UP dyrektywa accept pozawala na dodanie tylko określonych typoów plików. Dyrektywa change jest potrzebna, zeby
+wykonać odpowiednią akcję po wybraniu click:-->
+        <input type="file" [accept]="requiredFilesTypes" (change)="onFileChange($event)">
+        <button mat-flat-button color="basic">Upload</button>
+</form>

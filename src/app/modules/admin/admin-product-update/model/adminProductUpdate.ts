@@ -6,4 +6,6 @@ export interface AdminProductUpdate {
     category: string;
     price: number;
     currency: string;
+    // 9.11UP dodaję pole image:
+    image: string;
 }
