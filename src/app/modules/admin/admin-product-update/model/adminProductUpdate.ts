@@ -8,4 +8,5 @@ export interface AdminProductUpdate {
     currency: string;
     // 9.11UP dodaję pole image:
     image: string;
+    slug: string;
 }

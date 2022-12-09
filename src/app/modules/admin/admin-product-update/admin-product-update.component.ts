@@ -23,7 +23,6 @@ export class AdminProductUpdateComponent implements OnInit {
         image: string | null = null; // 9.8 null, bo może tego nie być przy tworzeniu/edytowaniu produktu. Żeby wypełnić to pole
         // po uploadzie, muszę w metodzie subscribe() przypisać to co otrzymam (result)
 
-
         // 22.0 tu wstrzykuję router. Będę teraz mógł pobrać id z urla:
         // 23.5 wstrzykuję serwis w komponencie:
 
@@ -47,7 +46,9 @@ export class AdminProductUpdateComponent implements OnInit {
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         category: ['', [Validators.required, Validators.minLength(4)]],
                         price: ['', [Validators.required, Validators.min(0)]],
-                        currency: ['PLN', Validators.required]
+                        currency: ['PLN', Validators.required],
+                        // 21.3UP dodaję pole i walidację:
+                        slug: ['', [Validators.required, Validators.minLength(4)]]
                 });
                 // 7.0UP konfiguruję formularz:
                 this.imageForm = this.formBuilder.group({
@@ -96,7 +97,8 @@ export class AdminProductUpdateComponent implements OnInit {
                         price: this.productForm.get('price')?.value,
                         currency: this.productForm.get('currency')?.value,
                         // 9.10UP dodaję pole image (dodaję też to pole w AdminProductUpdate) i przechodzę do metody mapFromValues:
-                        image: this.image
+                        image: this.image,
+                        slug: this.productForm.get('slug')?.value,
                 } as AdminProductUpdate) // 24.15 rzutowanie w TypeScripcie, czyli ten obiekt anonimowy, który tu tworzę będzie
                         // typu AdminProductUpdate. Zostają wtedy zachowane typy i mam przekonwertowany obiekt. Przechodzę do serwisu.
                         // 24.18 znowu dodaję tu jakieś gówno:
@@ -151,6 +153,7 @@ export class AdminProductUpdateComponent implements OnInit {
                         currency: product.currency,
                         // 9.12UP tutaj też dodaję to pole i przechodzę do szablonu html. JEDNAK NIE MA GO BYĆ:
                         // image: this.image,
+                        slug: product.slug
                         });
                 this.image = product.image;
         };

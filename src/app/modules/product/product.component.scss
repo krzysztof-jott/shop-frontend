@@ -23,3 +23,11 @@
 mat-card {
     margin-bottom: 15px;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
+// kolor po najechaniu kursorem:
+a:hover{
+    color: #777;
+}

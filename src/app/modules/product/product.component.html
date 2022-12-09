@@ -4,10 +4,16 @@
 <mat-card *ngFor="let product of page?.content">
         <div fxLayout="row">
                 <div fxLayout="column" fxFlex>
-                        <mat-card-title>{{product.name}}</mat-card-title>
+<!--                        19.0UP dodaję znacznik <a>, odpowiada za link. Dodaję routerlink, adres i brakuje .id więd dopisuję w modelu: -->
+<!--                        21.5UP zamieniam wszędzie id na slug:-->
+                        <mat-card-title><a routerLink="{{'/products/' + product.slug}}">{{product.name}}</a></mat-card-title>
                         <mat-card-subtitle>{{product.category}}</mat-card-subtitle>
                         <div fxLayout="row">
-                                <img src="/assets/image-placeholder.png" mat-card-lg-image class="productImage">
+<!--                                19.0UP dodaję znacznik <a>, odpowiada za link. Dodaję routerlink, adres-->
+                                <a routerLink="{{'/products/' + product.slug}}">
+                                        <img *ngIf="!product?.image" src="/assets/image-placeholder.png" mat-card-lg-image class="productImage">
+                                        <img *ngIf="product?.image" src="{{'/api/data/productImage/' + product?.image}}" mat-card-lg-image class="productImage">
+                                </a>
                                 <mat-card-content fxFlex class="productContent">{{product.description}}</mat-card-content>
                         </div>
                 </div>
@@ -16,18 +22,18 @@
                 </div>
         </div>
         <mat-card-actions align="end" fxLayoutGap="10">
-                <button mat-flat-button color="warn">Pokaż</button>
+<!--                19.1UP dodaję routerlink, adres-->
+                <button mat-flat-button color="warn" routerLink="{{'/products/' + product.slug}}">Pokaż</button>
                 <button mat-flat-button color="accent">Do koszyka</button>
         </mat-card-actions>
 </mat-card>
 <!--7.1 tu też dodaję ?:-->
 <!--7.2 dodaję dyrektywę, żeby paginacja się nie wyświetlała jak nie ma żadnych wyników:-->
+
 <mat-paginator *ngIf="page && page.totalElements > 0"
-            [length]="page?.totalElements"
+               [length]="page?.totalElements"
                [pageSize]="10"
                [pageSizeOptions]="[10, 25, 50, 100]"
                aria-label="Wybierz stronę"
                (page)="onPageEvent($event)">
 </mat-paginator>
-
-

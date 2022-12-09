@@ -10,13 +10,15 @@ import {AdminComponent} from "./modules/admin/admin.component";
 import {AdminProductsComponent} from "./modules/admin/admin-product/admin-product.component";
 import {AdminProductUpdateComponent} from "./modules/admin/admin-product-update/admin-product-update.component";
 import {AdminProductAddComponent} from "./modules/admin/admin-product-add/admin-product-add.component";
+import {ProductDetailsComponent} from "./modules/product-details/product-details.component";
 
 // 6.0 ten moduł odpowiada za ścieżki aplikacji
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, children: [
       {path: '', component: HomeComponent},
-      {path: 'products', component: ProductComponent}
+      {path: 'products', component: ProductComponent},
+      {path: 'products/:slug', component: ProductDetailsComponent}
     ]
   },
   {

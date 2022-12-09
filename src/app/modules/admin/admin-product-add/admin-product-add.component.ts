@@ -35,7 +35,9 @@ export class AdminProductAddComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(4)]],
       category: ['', [Validators.required, Validators.minLength(4)]],
       price: ['', [Validators.required, Validators.min(0)]], // minimalna liczba
-      currency: ['PLN', Validators.required]
+      currency: ['PLN', Validators.required],
+            // 21.2UP dodaję pole i walidację i poprawiam jeszcze w update potem:
+            slug: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
 

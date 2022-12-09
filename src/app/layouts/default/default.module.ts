@@ -8,13 +8,15 @@ import {SharedModule} from "../../shared/shared.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatCardModule} from "@angular/material/card";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {ProductDetailsComponent} from "../../modules/product-details/product-details.component";
 
 @NgModule({
-  declarations: [
-    DefaultComponent,
-    ProductComponent,
-    HomeComponent
-  ],
+        declarations: [
+                DefaultComponent,
+                ProductComponent,
+                HomeComponent,
+                ProductDetailsComponent
+        ],
     imports: [
         CommonModule,
         RouterModule,
