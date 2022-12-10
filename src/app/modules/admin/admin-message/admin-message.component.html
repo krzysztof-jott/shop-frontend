@@ -1,11 +1,7 @@
-<!--33.1 szablon do wyświewtlania wiadomości:-->
-<!--35.0 poprawiam wyświetlanie się "Błąd":-->
 <div class="messages" fxLayout="row" *ngIf="messages.length > 0">
-<!--		35.1 dodaję dodatkowego diva, będzie ogarniał wszystkie divy z wiadomościami i wrzucam tam tę pętlę:-->
 		<div fxFlex>
 				<div *ngFor="let message of messages">{{message}}</div>
 		</div>
-<!--		33.2 click ma zamykać komunikat-->
 		<button mat-icon-button class="clearMessages" (click)="clearMessages()">
 				<mat-icon>cancel</mat-icon>
 		</button>

@@ -1,7 +1,7 @@
-// 26.3 dodaję interface:
 export interface ProductDetails {
 	name: string;
 	description: string;
+	fullDescription: string;
 	category: string;
 	price: number;
 	currency: string;

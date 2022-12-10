@@ -17,14 +17,13 @@ import {ProductDetailsComponent} from "../../modules/product-details/product-det
                 HomeComponent,
                 ProductDetailsComponent
         ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        // 12.2 żeby tag "app-footer" się wyświetlał, trzeba zaimportować moduł shared do modułu domyślnego layoutu:
-        SharedModule,
-        FlexLayoutModule,
-        MatCardModule,
-        MatPaginatorModule
-    ]
+        imports: [
+                CommonModule,
+                RouterModule,
+                SharedModule,
+                FlexLayoutModule,
+                MatCardModule,
+                MatPaginatorModule
+        ]
 })
 export class DefaultModule { }
