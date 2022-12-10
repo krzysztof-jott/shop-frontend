@@ -4,6 +4,7 @@ import {AdminProductAddService} from "./admin-product-add.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AdminMessageService} from "../admin-message.service";
+import {AdminProductUpdate} from "../admin-product-update/model/adminProductUpdate";
 
 @Component({
         selector: 'app-admin-product-add',
@@ -13,6 +14,9 @@ import {AdminMessageService} from "../admin-message.service";
 export class AdminProductAddComponent implements OnInit {
 
         productForm!: FormGroup; // potrzeba jeszcze metody submit(), dodaję na dole
+        imageForm!: FormGroup;
+        requiredFilesTypes = "image/jpeg, image/png";
+        image: string | null = null;
 
         constructor(private formBuilder: FormBuilder,
                     private adminProductAddService: AdminProductAddService,
@@ -32,10 +36,22 @@ export class AdminProductAddComponent implements OnInit {
                         currency: ['PLN', Validators.required],
                         slug: ['', [Validators.required, Validators.minLength(4)]]
                 });
+                this.imageForm = this.formBuilder.group({
+                        file: [''],
+                })
         }
 
         submit() {
-                this.adminProductAddService.saveNewProduct(this.productForm.value) // przekazuję to co będzie w formularzu
+                this.adminProductAddService.saveNewProduct({
+                        name: this.productForm.get('name')?.value, // znak ?, żeby nie było problemów z nullem
+                        description: this.productForm.get('description')?.value,
+                        fullDescription: this.productForm.get('fullDescription')?.value,
+                        category: this.productForm.get('category')?.value,
+                        price: this.productForm.get('price')?.value,
+                        currency: this.productForm.get('currency')?.value,
+                        image: this.image,
+                        slug: this.productForm.get('slug')?.value,
+                } as AdminProductUpdate)
                           .subscribe({
                                   next: product => {
                                           this.router.navigate(["/admin/products/update", product.id])
@@ -45,4 +61,18 @@ export class AdminProductAddComponent implements OnInit {
                           });
         }
 
+        uploadFile() {
+                let formData = new FormData();
+                formData.append('file', this.imageForm.get('file')?.value);
+                this.adminProductAddService.uploadImage(formData)
+                          .subscribe(result => this.image = result.filename);
+        }
+
+        onFileChange(event: any) {
+                if (event.target.files.length > 0) {
+                        this.imageForm.patchValue({
+                                file: event.target.files[0] // czyli pierwszy plik jaki wybiorę
+                        });
+                }
+        }
 }

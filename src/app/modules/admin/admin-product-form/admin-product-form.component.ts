@@ -106,27 +106,21 @@ export class AdminProductFormComponent implements OnInit {
     get name() {
         return this.parentForm.get("name");
     }
-
     get description() {
         return this.parentForm.get("description");
     }
-
     get fullDescription() {
         return this.parentForm.get("fullDescription");
     }
-
     get category() {
         return this.parentForm.get("category");
     }
-
     get price() {
         return this.parentForm.get("price");
     }
-
     get currency() {
         return this.parentForm.get("currency");
     }
-
     get slug() {
         return this.parentForm.get("slug");
     }
