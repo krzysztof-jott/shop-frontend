@@ -1,5 +1,4 @@
-// 10.2 dodaję globalny styl dla tabel:
-table{
+table{  // dodaję globalny styl dla tabel:
     width: 100%;
 }
 // ustawia szerokość kolumny:
@@ -9,3 +8,4 @@ table{
 mat-column-actions{
     width: 140px;
 }
+.mat-column-image{ width: 155px; }

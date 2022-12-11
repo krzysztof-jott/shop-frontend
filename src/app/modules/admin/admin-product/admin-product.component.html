@@ -1,46 +1,46 @@
-<!--9.0 dodaję nagłówek. Będzie wyświwetlac tabele z listą produktów:-->
-<!--26.0 dodaję guzik do dodawania produktów:-->
-<!--29.x dodaję router linka:-->
-<h1>Lista produktów <button mat-raised-button color="warn" routerLink="/admin/products/add">Dodaj produkt<mat-icon>add</mat-icon></button></h1>
-<!--9.1 kopiuję tabelę z Angular Material:-->
+<h1>Lista produktów <button mat-raised-button color="warn" routerLink="/admin/products/add">
+    Dodaj produkt<mat-icon>add</mat-icon></button></h1>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> Id </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Cena </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} {{element.currency}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Akcje </th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [routerLink]="['/admin/products/update', element.id]">
+                <mat-icon color="accent"> edit </mat-icon>
+            </button>
+            <button mat-icon-button (click)="confirmDelete(element)">
+                <mat-icon color="warn"> delete </mat-icon>
+            </button>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Obraz </th>
+        <td mat-cell *matCellDef="let element">
+            <a routerLink="{{'/admin/products/update/' + element.id}}">
+                <img *ngIf="!element?.image" src="/assets/image-placeholder.png" mat-card-lg-image  width="150">
+                <img *ngIf="element?.image" src="{{'/api/data/productImage/'+ element?.image}}" width="150">
+            </a>
+        </td>
+    </ng-container>
 
-        <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Nazwa </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef> Cena </th>
-                <td mat-cell *matCellDef="let element"> {{element.price}} {{element.currency}}</td>
-        </ng-container>
-<!--19.0 kolumna będzie wyświetlać akcje:-->
-        <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef> Akcje </th>
-                <td mat-cell *matCellDef="let element">
-<!--                        19.1 dodaję akcję przekierowania guzika. W linku przekazuję id elementu, który chcę edytować:-->
-                        <button mat-icon-button [routerLink]="['/admin/products/update', element.id]">
-                                <mat-icon color="accent"> edit </mat-icon>
-                        </button>
-<!--   42.3 dodaję guzik do usuwania produktów:                  -->
-<!--                        43.8 zmieniam (element.id) na sam (element):-->
-                        <button mat-icon-button (click)="confirmDelete(element)">
-                                <mat-icon color="warn"> delete </mat-icon>
-                        </button>
-                </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<!--15.0 dodaję paginator z AM i dodaję pageSize:-->
-<!--15.7 dodaję pole length: nawiasy [] bo to wejściowe-->
+<!--dodaję pole length: nawiasy [] bo to wejściowe-->
 <mat-paginator
-            [pageSizeOptions]="[25, 50, 100]"
-            [pageSize]="25"
-            [length]="totalElements"
-            showFirstLastButtons>
+    [pageSizeOptions]="[25, 50, 100]"
+    [pageSize]="25"
+    [length]="totalElements"
+    showFirstLastButtons>
 </mat-paginator>
