@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AdminMessageService} from "../admin-message.service";
 import {AdminProductUpdate} from "../admin-product-update/model/adminProductUpdate";
+import {AdminProductUpdateService} from "../admin-product-update/admin-product-update.service";
 
 @Component({
         selector: 'app-admin-product-add',
@@ -22,7 +23,8 @@ export class AdminProductAddComponent implements OnInit {
                     private adminProductAddService: AdminProductAddService,
                     private router: Router, // klasa Router pozwoli na skorzystanie z metody navigate(), która przeniesie mnie
                     private snackBar: MatSnackBar,
-                    private adminMessageService: AdminMessageService
+                    private adminMessageService: AdminMessageService,
+                    private adminProductUpdateService: AdminProductUpdateService // nie wiem po co on to ma
         ) {
         }
 
@@ -31,7 +33,7 @@ export class AdminProductAddComponent implements OnInit {
                         name: ['', [Validators.required, Validators.minLength(4)]],
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         fullDescription: [''],
-                        category: ['', [Validators.required, Validators.minLength(4)]],
+                        categoryId: ['', [Validators.required]], // zostawiam tylko pole wymagane
                         price: ['', [Validators.required, Validators.min(0)]], // minimalna liczba
                         currency: ['PLN', Validators.required],
                         slug: ['', [Validators.required, Validators.minLength(4)]]
@@ -46,7 +48,7 @@ export class AdminProductAddComponent implements OnInit {
                         name: this.productForm.get('name')?.value, // znak ?, żeby nie było problemów z nullem
                         description: this.productForm.get('description')?.value,
                         fullDescription: this.productForm.get('fullDescription')?.value,
-                        category: this.productForm.get('category')?.value,
+                        categoryId: this.productForm.get('categoryId')?.value,
                         price: this.productForm.get('price')?.value,
                         currency: this.productForm.get('currency')?.value,
                         image: this.image,

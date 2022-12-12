@@ -4,7 +4,6 @@ import {FullpageadminComponent} from "./fullpageadmin.component";
 import {AdminComponent} from "../../modules/admin/admin.component";
 import {RouterModule} from "@angular/router";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {SharedModule} from "../../shared/shared.module";
 import {MaterialModule} from "../../shared/material.module";
 import {AdminProductsComponent} from "../../modules/admin/admin-product/admin-product.component";
 import {AdminProductUpdateComponent} from "../../modules/admin/admin-product-update/admin-product-update.component";
@@ -25,13 +24,12 @@ import {AdminConfirmDialogComponent} from "../../modules/admin/admin-confirm-dia
         AdminMessageComponent,
         AdminConfirmDialogComponent
     ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FlexLayoutModule,
-        SharedModule,
-        MaterialModule,
-        ReactiveFormsModule
-    ]
+	imports: [
+		CommonModule,
+		RouterModule,
+		FlexLayoutModule,
+		MaterialModule,
+		ReactiveFormsModule
+	]
 })
 export class FullpageadminModule { }

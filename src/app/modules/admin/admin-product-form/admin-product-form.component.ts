@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from "@angular/core";
-import {FormGroup} from "@angular/forms";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { AdminCategoryNamesDto } from "./AdminCategoryNamesDto";
+import { FormCategoryService } from "./form-category.service";
 
 @Component({
     selector: 'app-admin-product-form',
@@ -48,20 +50,26 @@ import {FormGroup} from "@angular/forms";
                 <mat-label>Pełny opis</mat-label>
                 <textarea matInput rows="4" placeholder="Podaj pełny opis produktu" formControlName="fullDescription"></textarea>
             </mat-form-field>
-
+            
             <mat-form-field appearance="fill">
                 <mat-label>Kategoria</mat-label>
-                <input matInput placeholder="Podaj kategorię produktu" formControlName="category">
-                <div *ngIf="category?.invalid && (category?.dirty || category?.touched)" class="errorMessages">
-                    <div *ngIf="category?.errors?.['required']">
+<!--                17.3 tu też dodaję Id do category i poprawiam getter:-->
+                <mat-select formControlName="categoryId">
+<!--                    12.0 dodaję na samym dole w klasie tablicę:-->
+                    <mat-option *ngFor="let el of categories" [value]="el.id">
+                        {{el.name}}
+                    </mat-option>
+                </mat-select>
+                <div *ngIf="categoryId?.invalid && (categoryId?.dirty || categoryId?.touched)" class="errorMessages">
+                    <div *ngIf="categoryId?.errors?.['required']">
                         Kategoria jest wymagana
                     </div>
-                    <div *ngIf="category?.errors?.['minlength']">
+<!--17.X usuwam walidację                    <div *ngIf="categoryId?.errors?.['minlength']">
                         Kategoria musi mieć przynajmniej 4 znaki
-                    </div>
+                    </div>-->
                 </div>
             </mat-form-field>
-
+            
             <mat-form-field appearance="fill">
                 <mat-label>Cena</mat-label>
                 <input matInput placeholder="Podaj cenę produktu" formControlName="price">
@@ -100,7 +108,22 @@ export class AdminProductFormComponent implements OnInit {
 
     @Input() parentForm!: FormGroup;
 
+    // 12.1 dodaję tablicę (póki co pusta):
+    categories: Array<AdminCategoryNamesDto> = [];
+
+    // 14.0 dodaję konstruktor:
+    constructor(private formCategoryService: FormCategoryService) {
+    }
+
+    // 14.2 i wywołuję ją
     ngOnInit(): void {
+        this.getCategories();
+    }
+
+    // 14.1 tworzę metodę, która pobierze kategorie:
+    getCategories() {
+        this.formCategoryService.getCategories()
+            .subscribe(categories => this.categories = categories)
     }
 
     get name() {
@@ -112,8 +135,8 @@ export class AdminProductFormComponent implements OnInit {
     get fullDescription() {
         return this.parentForm.get("fullDescription");
     }
-    get category() {
-        return this.parentForm.get("category");
+    get categoryId() {
+        return this.parentForm.get("categoryId");
     }
     get price() {
         return this.parentForm.get("price");

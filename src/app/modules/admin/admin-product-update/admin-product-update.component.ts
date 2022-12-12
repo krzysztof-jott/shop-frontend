@@ -33,7 +33,7 @@ export class AdminProductUpdateComponent implements OnInit {
                         name: ['', [Validators.required, Validators.minLength(4)]],
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         fullDescription: [''],
-                        category: ['', [Validators.required, Validators.minLength(4)]],
+                        categoryId: ['', [Validators.required]], // zostawiam tylko pole wymagane
                         price: ['', [Validators.required, Validators.min(0)]],
                         currency: ['PLN', Validators.required],
                         slug: ['', [Validators.required, Validators.minLength(4)]]
@@ -55,7 +55,8 @@ export class AdminProductUpdateComponent implements OnInit {
                         name: this.productForm.get('name')?.value, // znak ?, żeby nie było problemów z nullem
                         description: this.productForm.get('description')?.value,
                         fullDescription: this.productForm.get('fullDescription')?.value,
-                        category: this.productForm.get('category')?.value,
+                        // 17.2 tu też Id dodaję
+                        categoryId: this.productForm.get('categoryId')?.value,
                         price: this.productForm.get('price')?.value,
                         currency: this.productForm.get('currency')?.value,
                         image: this.image,
@@ -90,7 +91,10 @@ export class AdminProductUpdateComponent implements OnInit {
                         name: product.name,
                         description: product.description,
                         fullDescription: product.fullDescription,
-                        category: product.category,
+                        // 14.0 zamiast product.category daję 1. Pole to nie jest zwracane z usługi i po wpisaniu 1 będzie się
+                        // wybierać domyślna kategoria:
+                        // 17.0 teraz 1 zamianiam z powrotem na product. ale z categoryId
+                        categoryId: product.categoryId,
                         price: product.price,
                         currency: product.currency,
                         slug: product.slug
