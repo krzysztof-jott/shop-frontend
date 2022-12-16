@@ -33,7 +33,6 @@ export class AdminMessageComponent implements OnInit, OnDestroy {
     this.adminMessageService.subject.unsubscribe();
   }
 
-
   private timeoutCloseMessages() { // wydzielona metodę
     this.clickCounter++;
     setTimeout(() => {

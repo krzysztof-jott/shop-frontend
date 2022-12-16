@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { AdminCategoryNamesDto } from "./AdminCategoryNamesDto";
+import { AdminCategoryNameDto } from "../common/dto/AdminCategoryNameDto";
 import { FormCategoryService } from "./form-category.service";
 
 @Component({
@@ -109,7 +109,7 @@ export class AdminProductFormComponent implements OnInit {
     @Input() parentForm!: FormGroup;
 
     // 12.1 dodaję tablicę (póki co pusta):
-    categories: Array<AdminCategoryNamesDto> = [];
+    categories: Array<AdminCategoryNameDto> = [];
 
     // 14.0 dodaję konstruktor:
     constructor(private formCategoryService: FormCategoryService) {
