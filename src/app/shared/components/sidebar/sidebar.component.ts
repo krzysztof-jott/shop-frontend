@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarService } from "./sidebar.service";
+import { SidebarCategory } from "./model/sidebarCategory";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,11 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  // 27.4 dodaję tablicę kategorii:
-  categories = ['Kategoria 1', 'Kategoria 2', 'Kategoria 3', 'Kategoria 4', 'Kategoria 5'];
+  // 30.2 zmieniam categories, bo były nazwy wpisane na sztywno, na to:
+  categories: Array<SidebarCategory> = [];
 
-  constructor() { }
+  // categories = ['Kategoria 1', 'Kategoria 2', 'Kategoria 3', 'Kategoria 4', 'Kategoria 5'];
 
+  constructor(private sidebarService: SidebarService) { }
+
+  // 30.3 wywołuję metodę:
   ngOnInit(): void {
+    this.getCategories();
+  }
+
+  // 30.1 wywołuję metodę z serwisu:
+  getCategories() {
+    this.sidebarService.getCategories()
+        .subscribe(categories => this.categories = categories);
   }
 }
