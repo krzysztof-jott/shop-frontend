@@ -14,7 +14,7 @@ import { ProductDetailsComponent } from "./modules/product-details/product-detai
 import { AdminCategoryComponent } from "./modules/admin/admin-category/admin-category.component";
 import { AdminCategoryUpdateComponent } from "./modules/admin/admin-category/admin-category-update/admin-category-update.component";
 import { AdminCategoryAddComponent } from "./modules/admin/admin-category/admin-category-add/admin-category-add.component";
-import {CategoryComponent} from "./modules/category/category.component";
+import { CategoryComponent } from "./modules/category/category.component";
 
 const routes: Routes = [
   {
@@ -45,7 +45,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})], // 35.0 dodaję onSameUrl... i wstrzykuję router w komponencie
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
