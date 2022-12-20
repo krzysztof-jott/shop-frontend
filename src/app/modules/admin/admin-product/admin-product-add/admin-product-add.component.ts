@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AdminProductAddService} from "./admin-product-add.service";
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {AdminMessageService} from "../admin-message.service";
-import {AdminProductUpdate} from "../admin-product-update/model/adminProductUpdate";
-import {AdminProductUpdateService} from "../admin-product-update/admin-product-update.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AdminProductAddService } from "./admin-product-add.service";
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { AdminMessageService } from "../../common/service/admin-message.service";
+import { AdminProductUpdate } from "../model/adminProductUpdate";
+import { AdminProductImageService } from "../admin-product-image.service";
 
 @Component({
         selector: 'app-admin-product-add',
@@ -24,9 +24,8 @@ export class AdminProductAddComponent implements OnInit {
                     private router: Router, // klasa Router pozwoli na skorzystanie z metody navigate(), która przeniesie mnie
                     private snackBar: MatSnackBar,
                     private adminMessageService: AdminMessageService,
-                    private adminProductUpdateService: AdminProductUpdateService // nie wiem po co on to ma
-        ) {
-        }
+                    private adminProductImageService: AdminProductImageService
+        ) { }
 
         ngOnInit(): void {
                 this.productForm = this.formBuilder.group({
@@ -66,7 +65,7 @@ export class AdminProductAddComponent implements OnInit {
         uploadFile() {
                 let formData = new FormData();
                 formData.append('file', this.imageForm.get('file')?.value);
-                this.adminProductAddService.uploadImage(formData)
+                this.adminProductImageService.uploadImage(formData)
                           .subscribe(result => this.image = result.filename);
         }
 
@@ -75,6 +74,7 @@ export class AdminProductAddComponent implements OnInit {
                         this.imageForm.patchValue({
                                 file: event.target.files[0] // czyli pierwszy plik jaki wybiorę
                         });
+
                 }
         }
 }

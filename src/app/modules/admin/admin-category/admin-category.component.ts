@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AdminCategoryNameDto} from "../common/dto/AdminCategoryNameDto";
-import {AdminCategoryService} from "./admin-category.service";
-import {AdminConfirmDialogService} from "../admin-confirm-dialog.service";
-import {MatTable} from "@angular/material/table";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminCategoryNameDto } from "../common/dto/AdminCategoryNameDto";
+import { AdminCategoryService } from "./admin-category.service";
+import { AdminConfirmDialogService } from "../common/service/admin-confirm-dialog.service";
+import { MatTable } from "@angular/material/table";
 
 @Component({
     selector: 'app-admin-category',

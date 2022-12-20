@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Product } from "./model/product";
+import { Product } from "../common/model/product";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Page } from "../../shared/model/page";
+import { Page } from "../common/model/page";
 
 @Injectable({ // dekorator oznacza, że można ten serwis wstrzykiwać w dowolne miejsce
   providedIn: 'root'

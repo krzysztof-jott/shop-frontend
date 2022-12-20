@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {AdminProductService} from "./admin-product.service";
-import {MatPaginator} from "@angular/material/paginator";
-import {startWith, switchMap} from "rxjs";
-import {AdminProduct} from "./adminProduct";
-import {AdminConfirmDialogService} from "../admin-confirm-dialog.service";
-import {MatTable} from "@angular/material/table";
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AdminProductService } from "./admin-product.service";
+import { MatPaginator } from "@angular/material/paginator";
+import { startWith, switchMap } from "rxjs";
+import { AdminProduct } from "./model/adminProduct";
+import { AdminConfirmDialogService } from "../common/service/admin-confirm-dialog.service";
+import { MatTable } from "@angular/material/table";
 
 @Component({
     selector: 'app-admin-products',
@@ -34,7 +34,7 @@ export class AdminProductsComponent implements AfterViewInit {
         ).subscribe(data => {
             this.totalElements = data.totalElements;
             this.dataSource = data.content;
-        }) // teraz zaczeło działać stronicowanie
+        }) // teraz zaczęło działać stronicowanie
     }
 
     confirmDelete(element: AdminProduct) {

@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { AdminMessageService } from './admin-message.service';
 
-import { FormCategoryService } from './form-category.service';
-
-describe('FormCategoryService', () => {
-  let service: FormCategoryService;
+describe('AdminMessageService', () => {
+  let service: AdminMessageService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FormCategoryService);
+    service = TestBed.inject(AdminMessageService);
   });
 
   it('should be created', () => {
