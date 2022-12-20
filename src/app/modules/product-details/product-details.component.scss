@@ -1,5 +1,9 @@
 // 26.5UP dodaję style dla okienka detali i idę do komponentu:
 @import "../../../variables.scss";
+
+.content{
+    background-color: #ff4081;
+}
 .description, .fullDescription{
     margin-top:20px;
     margin-bottom: 25px;
@@ -10,4 +14,10 @@
     margin-top: 20px;
     margin-bottom: 20px;
     color: $warn;
+}
+// 47.2 dodaję styl dla opinii:
+.review {
+    background-color: white;
+    margin: 20px 0;
+    padding: 7px;
 }

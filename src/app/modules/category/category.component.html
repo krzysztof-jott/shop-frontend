@@ -1,8 +1,8 @@
 <!--40.4 zmieniam category na categoryProducts-->
-<h1>Kategoria: {{categoryProducts.category.name}}</h1>
-<p>{{categoryProducts.category.description}}</p>
+<h1>Kategoria: {{categoryProducts?.category?.name}}</h1>
+<p>{{categoryProducts?.category?.description}}</p>
 <!--33.0 wklejam z szablonu product:-->
-<mat-card *ngFor="let product of categoryProducts.products?.content">
+<mat-card *ngFor="let product of categoryProducts?.products?.content">
 	<div fxLayout="row">
 		<div fxLayout="column" fxFlex>
 			<mat-card-title><a routerLink="{{'/products/' + product.slug}}">{{product.name}}</a></mat-card-title>

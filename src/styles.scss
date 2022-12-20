@@ -1,4 +1,5 @@
 @import "variables";
+
 body,
 html {
     margin: 0;
@@ -8,5 +9,8 @@ html {
 }
 .content{
     padding: 20px;
-    background: $lightgray; // 28.0 zmieniam kolor tła
+    background: slategrey; // 28.0 zmieniam kolor tła
+}
+.snack-bar-bg-color-ok{ // dodaję kolor wyskakującego snackBara:
+    background-color: limegreen;
 }

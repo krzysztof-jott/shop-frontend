@@ -6,10 +6,9 @@ import { HomeComponent } from "../../modules/home/home.component";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../../shared/shared.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatCardModule } from "@angular/material/card";
-import { MatPaginatorModule } from "@angular/material/paginator";
 import { ProductDetailsComponent } from "../../modules/product-details/product-details.component";
 import { CategoryComponent } from "../../modules/category/category.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
         declarations: [
@@ -24,8 +23,7 @@ import { CategoryComponent } from "../../modules/category/category.component";
                 RouterModule,
                 SharedModule,
                 FlexLayoutModule,
-                MatCardModule,
-                MatPaginatorModule
+                ReactiveFormsModule
         ]
 })
 export class DefaultModule { }
