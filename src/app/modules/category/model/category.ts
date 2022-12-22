@@ -1,4 +1,3 @@
-// 33.4 tworzę interfejs:
 import { Product } from "../../common/model/product";
 
 export interface Category {

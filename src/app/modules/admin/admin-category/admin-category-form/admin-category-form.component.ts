@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
-// 24.0 skopiowałem formularz z admin-product-form i przerobiłem:
 @Component({
     selector: 'app-admin-category-form',
     template: `

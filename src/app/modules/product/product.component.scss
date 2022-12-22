@@ -1,34 +1,29 @@
 @import "../../../variables";
-// 28.6 dodaję klasę i nadaję temu kontenerowi style, żeby flex zadziałał:
+
 :host {
     display: flex;
     flex-direction: column;
     font-family: "Segoe UI Black", serif;
 }
-// 28.11 style dla klasy:
 .productImage {
     margin-right: 10px;
 }
-// 28.13 styl dla klasy:
 .productPrice{
     font-size: 20px; // powiększam czcionkę
     font-weight: 500; // zwiększam grubość czcionki
     margin-top: 20px;
     color: $warn;
 }
-// 28.14 zwiększam czcionę opisu
 .productContent{
     font-size: 18px;
 }
-// 29.3 dodaję odstępy pomiędzy wyswietanymi produktami:
-mat-card {
+mat-card { // dodaję odstępy pomiędzy wyświetlanymi produktami:
     margin-bottom: 15px;
 }
 a {
     text-decoration: none;
     color: black;
 }
-// kolor po najechaniu kursorem:
-a:hover{
+a:hover{ // kolor po najechaniu kursorem:
     color: #777;
 }

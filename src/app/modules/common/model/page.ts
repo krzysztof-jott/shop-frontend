@@ -1,5 +1,4 @@
-// interfejs służy do stronicowania obiektów, uniwersalny interfejs do stronicowania
-export interface Page<T> { // 6.0 parametr generyczny pozwoli sparametryzować listę wyników
+export interface Page<T> { // interfejs służy do stronicowania obiektów, uniwersalny interfejs do stronicowania
     content: T[], // tablica produktów
     totalElements: number // całkowita liczba elementów w bazie danych.
 }

@@ -19,14 +19,10 @@
 	<div class="fullDescription">
 		{{product.fullDescription}}
 	</div>
-<!--	45.0 tu dodam opinie:-->
-
 	<div>
 
 		<h2>Opinie o produkcie</h2>
-<!--		45.1 wklejam wcześniej przygotowany formularz, dodaję pola w komponencie, importuję moduł formularza
-ReactiveFormsModule i dodaję gettery dla pól authorName i content:-->
-<!--		47.0 dodaję diva: -->
+
 		<div>
 			<div *ngFor="let review of product?.reviews" class="review">
 				<div>Autor: {{review.authorName}}</div>

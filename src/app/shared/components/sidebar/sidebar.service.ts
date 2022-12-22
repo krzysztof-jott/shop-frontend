@@ -10,7 +10,6 @@ export class SidebarService {
 
   constructor(private http: HttpClient) { }
 
-  // 30.0 tworzę metodę do pobierania kategorii:
   getCategories(): Observable<Array<SidebarCategory>> {
     return this.http.get<Array<SidebarCategory>>("/api/categories");
   }

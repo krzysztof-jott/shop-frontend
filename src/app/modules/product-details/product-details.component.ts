@@ -14,7 +14,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class ProductDetailsComponent implements OnInit {
 
   product!: ProductDetails;
-  // 45.2 dodaję pole z szablonu:
   reviewForm!: FormGroup;
 
   constructor(
@@ -27,9 +26,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductDetails();
-  //  45.5 inicjuję formularz:
     this.reviewForm = this.formBuilder.group({
-      // definicja formularza:
       authorName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]],
       content: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(600)]]
     });
@@ -41,9 +38,7 @@ export class ProductDetailsComponent implements OnInit {
               .subscribe(product => this.product = product);
   }
 
-  // 46.0 zapisuję komentarz:
   submit() {
-    // 46.2 jeśli jest zwalidowany:
     if (this.reviewForm.valid) {
       this.productDetailsService.saveProductReview({
         authorName: this.reviewForm.get("authorName")?.value, // pole może być puste więc potrzebny znak zapytania
@@ -56,7 +51,6 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  // 45.3 dodaję gettery:
   get authorName() {
     return this.reviewForm.get('authorName');
   }

@@ -10,6 +10,5 @@ export interface ProductDetails {
 	currency: string;
 	image: string;
 	slug: string;
-	// 47.1 dodaję pole:
 	reviews: Array<Review>;
 }

@@ -26,7 +26,7 @@ export class AdminProductsComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.paginator.page.pipe( // pipe coś jak Observable, ale pozwala na nim używać dodatkowych operatorów
+        this.paginator.page.pipe( // pipe to coś jak Observable, ale pozwala na nim używać dodatkowych operatorów
             startWith({}),
             switchMap(() => {
                 return this.adminProductService.getProducts(this.paginator.pageIndex, this.paginator.pageSize);

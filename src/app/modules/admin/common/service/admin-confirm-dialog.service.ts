@@ -7,7 +7,8 @@ import { AdminConfirmDialogComponent } from "../component/admin-confirm-dialog/a
 })
 export class AdminConfirmDialogService {
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {
+  }
 
   openConfirmDialog(message: string): MatDialogRef<AdminConfirmDialogComponent, Boolean> {
     return this.dialog.open(AdminConfirmDialogComponent, {
@@ -15,6 +16,6 @@ export class AdminConfirmDialogService {
       data: {
         message: message
       }
-    })
+    });
   }
 }

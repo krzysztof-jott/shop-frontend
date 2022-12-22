@@ -1,5 +1,6 @@
 <h1>Lista produktów <button mat-raised-button color="warn" routerLink="/admin/products/add">
     Dodaj produkt<mat-icon>add</mat-icon></button></h1>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -37,7 +38,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<!--dodaję pole length: nawiasy [] bo to wejściowe-->
+<!--nawiasy [] bo to wejściowe-->
 <mat-paginator
     [pageSizeOptions]="[25, 50, 100]"
     [pageSize]="25"

@@ -13,8 +13,7 @@ export class AdminMessageComponent implements OnInit, OnDestroy {
 
   private clickCounter: number = 0;
 
-  constructor(private adminMessageService: AdminMessageService) {
-  }
+  constructor(private adminMessageService: AdminMessageService) { }
 
   ngOnInit(): void {
     this.adminMessageService.subject.subscribe(messages => {

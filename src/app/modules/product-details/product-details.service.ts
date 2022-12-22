@@ -16,7 +16,6 @@ export class ProductDetailsService {
     return this.http.get<ProductDetails>("/api/products/" + slug);
   }
 
-  // 46.2 tworzę metodę i wracam do submit:
   saveProductReview(review: Review): Observable<Review> {
     return this.http.post<Review>("/api/reviews", review);
   }

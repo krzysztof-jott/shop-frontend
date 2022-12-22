@@ -5,7 +5,7 @@ import { AdminProductUpdate } from "../model/adminProductUpdate";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { AdminMessageService } from "../../common/service/admin-message.service";
-import {AdminProductImageService} from "../admin-product-image.service";
+import { AdminProductImageService } from "../admin-product-image.service";
 
 @Component({
         selector: 'app-admin-product-update',
@@ -14,7 +14,7 @@ import {AdminProductImageService} from "../admin-product-image.service";
 })
 export class AdminProductUpdateComponent implements OnInit {
 
-        product!: AdminProductUpdate; // 23.6 tu dodaję to pole
+        product!: AdminProductUpdate;
         productForm!: FormGroup;
         imageForm!: FormGroup;
         requiredFilesTypes = "image/jpeg, image/png"; // tylko takie pliki będzie można dodać
@@ -93,9 +93,6 @@ export class AdminProductUpdateComponent implements OnInit {
                         name: product.name,
                         description: product.description,
                         fullDescription: product.fullDescription,
-                        // 14.0 zamiast product.category daję 1. Pole to nie jest zwracane z usługi i po wpisaniu 1 będzie się
-                        // wybierać domyślna kategoria:
-                        // 17.0 teraz 1 zamianiam z powrotem na product. ale z categoryId
                         categoryId: product.categoryId,
                         price: product.price,
                         currency: product.currency,
