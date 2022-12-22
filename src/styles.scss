@@ -1,11 +1,10 @@
 @import "variables";
 
-body,
-html {
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Segoe UI Black", serif;
 }
 .content{
     padding: 20px;
@@ -13,4 +12,7 @@ html {
 }
 .snack-bar-bg-color-ok{ // dodaję kolor wyskakującego snackBara:
     background-color: limegreen;
+}
+table {
+    width: 100%;
 }

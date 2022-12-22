@@ -1,23 +1,24 @@
 <header fxLayout="column" fxLayoutAlign="start">
-        <div fxFlex fxLayoutAlign="start end" fxLayoutGap="15">
-                <mat-icon color="warn" class="logoicon">store</mat-icon>
-                <span class="logo">Panel</span>
-        </div>
+	<div fxFlex fxLayoutAlign="start end" fxLayoutGap="15">
+		<mat-icon color="warn" class="logoicon">store</mat-icon>
+		<span class="logo">Panel</span>
+	</div>
 </header>
 <div fxLayout="row" fxFlex>
-        <div>
-                <div fxFlex class="sidebar">
-                        <mat-selection-list [multiple]="false">
-                                <mat-list-option><a routerLink="/admin">Dashboard</a></mat-list-option>
-                                <mat-list-option><a routerLink="/admin/products">Produkty</a></mat-list-option>
-<!--                                19.0 dodaje linka do kategorii:-->
-                                <mat-list-option><a routerLink="/admin/categories">Kategorie</a></mat-list-option>
-                                <mat-list-option><a routerLink="/admin">Link</a></mat-list-option>
-                        </mat-selection-list>
-                </div>
-        </div>
-        <div fxFlex class="content">
-                <app-admin-message></app-admin-message>
-                <router-outlet></router-outlet>
-        </div>
+	<div>
+		<div fxFlex class="sidebar">
+			<mat-selection-list [multiple]="false">
+				<mat-list-option><a routerLink="/admin">Dashboard</a></mat-list-option>
+				<mat-list-option><a routerLink="/admin/products">Produkty</a></mat-list-option>
+				<!--                                19.0 dodaje linka do kategorii:-->
+				<mat-list-option><a routerLink="/admin/categories">Kategorie</a></mat-list-option>
+				<mat-list-option><a routerLink="/admin/reviews">Opinie</a></mat-list-option>
+				<mat-list-option><a routerLink="/admin">Link</a></mat-list-option>
+			</mat-selection-list>
+		</div>
+	</div>
+	<div fxFlex class="content">
+		<app-admin-message></app-admin-message>
+		<router-outlet></router-outlet>
+	</div>
 </div>

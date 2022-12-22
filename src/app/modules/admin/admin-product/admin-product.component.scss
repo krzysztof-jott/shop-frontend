@@ -1,8 +1,8 @@
 table{  // dodaję globalny styl dla tabel:
     width: 100%;
+    font-family: "Segoe UI Black", serif;
 }
-// ustawia szerokość kolumny:
-.mat-column-id{
+.mat-column-id{ // ustawia szerokość kolumny:
     width: 60px;
 }
 mat-column-actions{
