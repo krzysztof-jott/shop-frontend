@@ -8,6 +8,9 @@
 		<button mat-flat-button routerLink="/products">Produkty</button>
 		<span></span>
 		<button mat-flat-button color="primary" routerLink="/login">Zaloguj</button>
-		<mat-icon color="warn" class="shoppingBasket">shopping_basket</mat-icon>
+<!--		10.0 dodaję link do ikony koszyka:-->
+		<a routerLink="/cart">
+			<mat-icon color="warn" class="shoppingBasket">shopping_basket</mat-icon>
+		</a>
 	</div>
 </header>

@@ -9,6 +9,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { ProductDetailsComponent } from "../../modules/product-details/product-details.component";
 import { CategoryComponent } from "../../modules/category/category.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { CartComponent } from "../../modules/cart/cart.component";
 
 @NgModule({
         declarations: [
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from "@angular/forms";
                 ProductComponent,
                 HomeComponent,
                 ProductDetailsComponent,
-                CategoryComponent
+                CategoryComponent,
+                CartComponent
         ],
         imports: [
                 CommonModule,
