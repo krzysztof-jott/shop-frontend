@@ -1,4 +1,4 @@
-import {CartProduct} from "./cartProduct";
+import { CartProduct } from "./cartProduct";
 
 export interface CartSummaryItem {
 	id: number;
