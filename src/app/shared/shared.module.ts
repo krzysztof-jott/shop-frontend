@@ -13,12 +13,12 @@ import { MaterialModule } from "./material.module";
         SidebarComponent,
         FooterComponent
     ],
-    imports: [
-        CommonModule,
-        RouterModule,
-        FlexModule,
-        MaterialModule
-    ],
+	imports: [
+		CommonModule,
+		RouterModule,
+		FlexModule,
+		MaterialModule
+	],
     exports: [
         HeaderComponent,
         SidebarComponent,

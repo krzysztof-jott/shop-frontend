@@ -5,6 +5,7 @@ import { CartSummary } from "./model/cartSummary";
 import { CookieService } from "ngx-cookie-service";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { CartSummaryItem } from "./model/cartSummaryItem";
+import { CartIconService } from "../common/service/cart-icon.service";
 
 @Component({
   selector: 'app-cart',
@@ -24,7 +25,9 @@ export class CartComponent implements OnInit {
               private cookieService: CookieService,
               private router: Router,
               // 14.3 wstrzykuję formBuiler:
-              private formBuilder: FormBuilder
+              private formBuilder: FormBuilder,
+              // 22.0 wstrzykuję serwis, który będzie generował te eventy i idę do metody addToCart poniżej:
+              private cartIconService: CartIconService
   ) { }
 
   ngOnInit(): void {
@@ -53,6 +56,8 @@ export class CartComponent implements OnInit {
                 this.summary = summary
                 // 14.7 dodaję to samo pole:
                 this.patchFormItems();
+                // 22.2 dodaję pole:
+                this.cartIconService.cartChanged(summary.items.length)
               });
     }
   }
@@ -65,6 +70,8 @@ export class CartComponent implements OnInit {
               this.summary = summary;
               // 14.6 dodaję pole:
               this.patchFormItems();
+              // 22.1 dodaję pole i idę dalej do getCart u góry:
+              this.cartIconService.cartChanged(summary.items.length) // teraz widać ile elementów jest w koszyku
               this.cookieService.delete("cartId"); // usuwam cookie przed każdym ustawieniem
               // 11.6 muszę dodać toString, bo wartości w cookie to sringi:
               this.cookieService.set("cartId", summary.id.toString(), this.expiresDays(3));

@@ -10,7 +10,8 @@
 		<button mat-flat-button color="primary" routerLink="/login">Zaloguj</button>
 <!--		10.0 dodaję link do ikony koszyka:-->
 		<a routerLink="/cart">
-			<mat-icon color="warn" class="shoppingBasket">shopping_basket</mat-icon>
+<!--			19.0 dodaję matBadge:-->
+			<mat-icon  color="warn" class="shoppingBasket" matBadge="{{cartProductCounter}}" matBadgeColor="warn">shopping_basket</mat-icon>
 		</a>
 	</div>
 </header>
