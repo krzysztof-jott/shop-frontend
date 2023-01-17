@@ -10,6 +10,8 @@ import { ProductDetailsComponent } from "../../modules/product-details/product-d
 import { CategoryComponent } from "../../modules/category/category.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CartComponent } from "../../modules/cart/cart.component";
+import { OrderComponent } from "../../modules/order/order.component";
+import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
         declarations: [
@@ -18,14 +20,16 @@ import { CartComponent } from "../../modules/cart/cart.component";
                 HomeComponent,
                 ProductDetailsComponent,
                 CategoryComponent,
-                CartComponent
+                CartComponent,
+                OrderComponent
         ],
-        imports: [
-                CommonModule,
-                RouterModule,
-                SharedModule,
-                FlexLayoutModule,
-                ReactiveFormsModule
-        ]
+	imports: [
+		CommonModule,
+		RouterModule,
+		SharedModule,
+		FlexLayoutModule,
+		ReactiveFormsModule,
+		MatRadioModule
+	]
 })
 export class DefaultModule { }
