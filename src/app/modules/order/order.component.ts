@@ -5,6 +5,7 @@ import { CartSummary } from "../common/model/cart/cartSummary";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { OrderDto } from "./model/orderDto";
 import { OrderSummary } from "./model/orderSummary";
+import { InitData } from "./model/initData";
 
 @Component({
   selector: 'app-order',
@@ -17,10 +18,12 @@ export class OrderComponent implements OnInit {
   // 5.1 dodaję pole:
   formGrup!: FormGroup;
   orderSummary!: OrderSummary;
+  initData!: InitData;
 
   private statuses = new Map<string, string>([
     ["NEW", "Nowe"],
   ]);
+
 
   constructor(private cookieService: CookieService,
               private orderService: OrderService,
@@ -39,7 +42,9 @@ export class OrderComponent implements OnInit {
       city: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
+      shipment: ['', Validators.required]
     });
+    this.getInitData();
 
   }
   // 2.0 tworzę metodę:
@@ -49,7 +54,6 @@ export class OrderComponent implements OnInit {
     this.orderService.getCart(cartId)
             .subscribe(summary => this.cartSummary = summary); // przechodzę do szablonu zamówień
   }
-
 
   // 6.2 dodaję metodę:
   submit() {
@@ -62,7 +66,9 @@ export class OrderComponent implements OnInit {
         city: this.formGrup.get('city')?.value,
         email: this.formGrup.get('email')?.value,
         phone: this.formGrup.get('phone')?.value,
-        cartId: Number(this.cookieService.get("cartId"))
+        cartId: Number(this.cookieService.get("cartId")),
+      //   21.0 dodaję shipmentId:
+        shipmentId: Number(this.formGrup.get('shipment')?.value.id)
       } as OrderDto) // rzutuję do DTO
               // 7.1 w subscribe, jeśli zamówienie zostało złożone pomyślnie, to powinienem usunąć ciastko z id koszyka. Koszyk
               // powinien być wyczyszczony, więc robię cookie service delete:
@@ -71,6 +77,23 @@ export class OrderComponent implements OnInit {
                 this.cookieService.delete("cartId"); // nazwa ciastka
               });
     }
+  }
+
+  // 17.1 metoda:
+  getInitData() {
+    this.orderService.getInitData()
+            .subscribe(initData => {
+              this.initData = initData;
+              // 19.0 metoda
+              this.setDefaultShipment();
+            }); // dodaję pole u góry i wywołuję w ngOnInit
+  }
+
+  private setDefaultShipment() { //19.1  filtruję listę sposobów dostawy
+    this.formGrup.patchValue({
+      "shipment": this.initData.shipments.filter(
+              shipment => shipment.defaultShipment)[0]
+    });
   }
 
   getStatus(status: string) {
@@ -103,5 +126,9 @@ export class OrderComponent implements OnInit {
 
   get phone() {
     return this.formGrup.get("phone");
+  }
+
+  get shipment() {
+    return this.formGrup.get("shipment");
   }
 }

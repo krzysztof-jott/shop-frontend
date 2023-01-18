@@ -11,7 +11,6 @@ import { CategoryComponent } from "../../modules/category/category.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CartComponent } from "../../modules/cart/cart.component";
 import { OrderComponent } from "../../modules/order/order.component";
-import { MatRadioModule } from "@angular/material/radio";
 
 @NgModule({
         declarations: [
@@ -29,7 +28,6 @@ import { MatRadioModule } from "@angular/material/radio";
 		SharedModule,
 		FlexLayoutModule,
 		ReactiveFormsModule,
-		MatRadioModule
 	]
 })
 export class DefaultModule { }

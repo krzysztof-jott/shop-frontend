@@ -14,3 +14,22 @@
 .orderSummary div{
     margin-bottom: 12px;
 }
+.shipmentRadioButton{
+    margin: 10px 0;
+    font-size: 18px;
+}
+.shipment-2{
+    margin-left: 10px;
+    font-weight: bolder;
+}
+.orderTotal {
+    background: darkred;
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    font-size: 22px;
+    font-weight: 500;
+}
+.orderTotalValue {
+    font-size: 24px;
+    font-weight: 700;
+}
