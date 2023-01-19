@@ -42,7 +42,8 @@ export class OrderComponent implements OnInit {
       city: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      shipment: ['', Validators.required]
+      shipment: ['', Validators.required],
+      payment: ['', Validators.required]
     });
     this.getInitData();
 
@@ -67,8 +68,10 @@ export class OrderComponent implements OnInit {
         email: this.formGrup.get('email')?.value,
         phone: this.formGrup.get('phone')?.value,
         cartId: Number(this.cookieService.get("cartId")),
-      //   21.0 dodaję shipmentId:
-        shipmentId: Number(this.formGrup.get('shipment')?.value.id)
+        //   21.0 dodaję shipmentId:
+        shipmentId: Number(this.formGrup.get('shipment')?.value.id),
+        // 26.3 dodaję paymentId:
+        paymentId: Number(this.formGrup.get('payment')?.value.id)
       } as OrderDto) // rzutuję do DTO
               // 7.1 w subscribe, jeśli zamówienie zostało złożone pomyślnie, to powinienem usunąć ciastko z id koszyka. Koszyk
               // powinien być wyczyszczony, więc robię cookie service delete:
@@ -86,6 +89,8 @@ export class OrderComponent implements OnInit {
               this.initData = initData;
               // 19.0 metoda
               this.setDefaultShipment();
+              // 26.1 domyślna płatność i tworzę metodę:
+              this.setDefaultPayment();
             }); // dodaję pole u góry i wywołuję w ngOnInit
   }
 
@@ -93,6 +98,14 @@ export class OrderComponent implements OnInit {
     this.formGrup.patchValue({
       "shipment": this.initData.shipments.filter(
               shipment => shipment.defaultShipment)[0]
+    });
+  }
+
+  // 26.2 tworzę metodę:
+  private setDefaultPayment() {
+    this.formGrup.patchValue({
+      "payment": this.initData.payments.filter(
+              payment => payment.defaultPayment)[0]
     });
   }
 

@@ -2,10 +2,15 @@
 
 <!--7.2 wklejam podsumowanie:-->
 <div *ngIf="orderSummary" class="orderSummary">
-	<div>Nowe zamówienie o numerze: {{orderSummary.id}}</div>
-	<div>Data złożenia: {{orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm'}}</div>
-	<div>Status: {{getStatus(orderSummary.status)}}</div>
-	<div>Wartość: {{orderSummary.grossValue}} PLN</div>
+	<div>Nowe zamówienie o numerze: {{ orderSummary.id }}</div>
+	<div>Data złożenia: {{ orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm' }}</div>
+	<div>Status: {{ getStatus(orderSummary.status) }}</div>
+	<div>Wartość: {{ orderSummary.grossValue }} PLN</div>
+<!--	29.0 jeśli jest notatka to wyświetla:-->
+<!--	31.0 dodaję dyrektywę innerHTML:-->
+	<div *ngIf="orderSummary.payment.note">Płatność:
+		<br>
+		<span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span></div>
 </div>
 
 <!--3.6 jeśli koszyk jest pusty to:-->
@@ -127,11 +132,20 @@
 								</mat-radio-button>
 							</mat-radio-group>
 						</div>
+<!--						26.0 dodaję płatność-->
+						<div>
+							<h2>Płatność</h2>
+							<mat-radio-group fxLayout="column" formControlName="payment">
+								<mat-radio-button class="paymentRadioButton" *ngFor="let payment of initData?.payments"
+								                  [value]="payment" [checked]="payment.defaultPayment">{{ payment.name }}
+								</mat-radio-button>
+							</mat-radio-group>
+						</div>
 <!--						20.0 podsumowanie:-->
 						<div fxLayoutAlign="end">
 							<div class="orderTotal">Całkowita kwota do zapłaty:
 								<span class="orderTotalValue">{{ cartSummary?.summary?.grossValue +
-								shipment?.value.price}} PLN</span>
+								shipment?.value.price }} PLN</span>
 							</div>
 						</div>
 					</div>
