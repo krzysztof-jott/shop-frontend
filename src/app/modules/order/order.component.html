@@ -148,6 +148,10 @@
 								shipment?.value.price }} PLN</span>
 							</div>
 						</div>
+<!--						43.1 dodaję info o błędach:-->
+						<div *ngIf="errorMessage" class="errorMessage" fxLayoutAlign="end start">
+							Coś poszło źle, spróbuj ponownie później.
+						</div>
 					</div>
 					<div fxLayoutAlign="end start">
 						<button mat-flat-button color="accent" class="orderButton">Zamawiam i płacę</button>

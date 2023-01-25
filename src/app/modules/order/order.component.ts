@@ -19,6 +19,7 @@ export class OrderComponent implements OnInit {
   formGrup!: FormGroup;
   orderSummary!: OrderSummary;
   initData!: InitData;
+  errorMessage = false;
 
   private statuses = new Map<string, string>([
     ["NEW", "Nowe"],
@@ -75,9 +76,14 @@ export class OrderComponent implements OnInit {
       } as OrderDto) // rzutuję do DTO
               // 7.1 w subscribe, jeśli zamówienie zostało złożone pomyślnie, to powinienem usunąć ciastko z id koszyka. Koszyk
               // powinien być wyczyszczony, więc robię cookie service delete:
-              .subscribe(orderSummary => { // SPRAWDZIĆ NA KONIEC MODUŁU!!!
-                this.orderSummary = orderSummary;
-                this.cookieService.delete("cartId"); // nazwa ciastka
+              // 43.0 dodaję obsługę błędów:
+              .subscribe({
+                next: orderSummary => { // SPRAWDZIĆ NA KONIEC MODUŁU!!!
+                  this.orderSummary = orderSummary;
+                  this.cookieService.delete("cartId"); // nazwa ciastka
+                  this.errorMessage = false;
+                },
+                error: err => this.errorMessage = true
               });
     }
   }
