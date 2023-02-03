@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { OrderDto } from "./model/orderDto";
 import { OrderSummary } from "./model/orderSummary";
 import { InitData } from "./model/initData";
+import { CartIconService } from "../common/service/cart-icon.service";
 
 @Component({
   selector: 'app-order',
@@ -30,7 +31,7 @@ export class OrderComponent implements OnInit {
               private orderService: OrderService,
               // 5.2 wstrzykuję buildera:
               private formBuilder: FormBuilder,
-              ) { }
+              private cartIconService: CartIconService) { }
 
   ngOnInit(): void { // 2.1 teraz tu:
     this.checkCartEmpty();
@@ -82,6 +83,7 @@ export class OrderComponent implements OnInit {
                   this.orderSummary = orderSummary;
                   this.cookieService.delete("cartId"); // nazwa ciastka
                   this.errorMessage = false;
+                  this.cartIconService.cartChanged(0);
                 },
                 error: err => this.errorMessage = true
               });

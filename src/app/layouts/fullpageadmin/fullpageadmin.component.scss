@@ -2,10 +2,12 @@
     display: flex; // bez tego flexLayout nie zadziała
     flex-direction: column; // wyznacza kierunek layoutu na kolumnowy
     height: 100%;
+
 }
 .content {
     padding: 20px;
-    background: gray;
+    background: goldenrod;
+    color: black;
 }
 header {
     background: #292b31;

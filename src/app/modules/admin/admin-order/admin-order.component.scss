@@ -1,0 +1,16 @@
+table{  // dodaję globalny styl dla tabel:
+    width: 100%;
+    font-family: "Segoe UI Black", serif;
+    background-color: #777777;
+    color: black;
+}
+.mat-column-id {
+    width: 60px;
+}
+.mat-column-actions {
+    width: 120px;
+}
+.status-NEW{
+    background-color: yellowgreen;
+    padding: 7px;
+}
