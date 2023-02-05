@@ -6,9 +6,18 @@
 	<br><br>
 	Data złożenia: {{ order?.placeDate | date: 'yyyy-MM-dd HH-mm'}}<br>
 	Płatność: {{ order?.payment?.name }}<br><br>
-
-	<form fxLayout="row" fxLayoutAlign="space-between start">
-		<div>Status: {{ order?.orderStatus }}</div>
+<!--1.0 dodaję submit i [formGroup]:-->
+	<form [formGroup]="formGroup" fxLayout="row" fxLayoutAlign="space-between start" (submit)="changeStatus()">
+<!--		1.2 usuwam:-->
+		<!--<div>Status: {{ order?.orderStatus }}</div>-->
+<!--		1.1 dodaję mat form field:-->
+		<mat-form-field appearance="fill">
+			<mat-label>Status</mat-label>
+			<mat-select formControlName="orderStatus">
+<!--				5.4 tworzę pajpa keyvalue:-->
+				<mat-option *ngFor="let status of statuses | keyvalue" [value]="status.key">{{ status.value }}</mat-option>
+			</mat-select>
+		</mat-form-field>
 		<button mat-flat-button color="accent">Zapisz</button>
 	</form>
 </div>

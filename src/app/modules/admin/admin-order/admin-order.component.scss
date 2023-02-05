@@ -11,6 +11,30 @@ table{  // dodaję globalny styl dla tabel:
     width: 120px;
 }
 .status-NEW{
-    background-color: yellowgreen;
+    background-color: #d00000;
+    padding: 7px;
+}
+.status-PAID{
+    background-color: rgb(250, 158, 158);
+    padding: 7px;
+}
+.status-PROCESSING{
+    background-color: rgb(133, 50, 238);
+    padding: 7px;
+}
+.status-WAITING_FOR_DELIVERY{
+    background-color: rgb(222, 215, 44);
+    padding: 7px;
+}
+.status-COMPLETED{
+    background-color: rgb(43, 121, 28);
+    padding: 7px;
+}
+.status-CANCELED{
+    background-color: rgb(243, 124, 6);
+    padding: 7px;
+}
+.status-REFUND{
+    background-color: rgb(7, 0, 0);
     padding: 7px;
 }
