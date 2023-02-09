@@ -1,5 +1,6 @@
 import { AdminOrderRow } from "./adminOrderRow";
 import { AdminPayment } from "./adminPayment";
+import { AdminOrderLog } from "./adminOrderLog";
 
 export interface AdminOrder {
 	id: number,
@@ -14,5 +15,7 @@ export interface AdminOrder {
 	city: string,
 	email: string,
 	phone: string,
-	payment: AdminPayment
+	payment: AdminPayment,
+// 	11.0 dodaję pole:
+	orderLogs: Array<AdminOrderLog>;
 }

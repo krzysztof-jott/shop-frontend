@@ -41,7 +41,10 @@ export class AdminOrderUpdateComponent implements OnInit {
               this.order = order;
               this.formGroup.setValue({
                 orderStatus: order.orderStatus
-              });
+              }) // 11.1 dodaję sortowanie po dacie utworzenia, ale muszę najpierw skonwertować daty na wartości numeryczne przez
+              // zrobienie nowego obiektu daty:
+              order.orderLogs.sort((el1, el2) =>
+                      new Date(el2.created).getTime()- new Date(el1.created).getTime())
             });
   }
 
