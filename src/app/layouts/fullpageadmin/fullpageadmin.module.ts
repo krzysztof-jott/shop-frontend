@@ -20,6 +20,7 @@ import { AdminReviewComponent } from "../../modules/admin/admin-review/admin-rev
 import { AdminOrderComponent } from "../../modules/admin/admin-order/admin-order.component";
 import { AdminOrderUpdateComponent } from "../../modules/admin/admin-order/admin-order-update/admin-order-update.component";
 import { AdminOrderExportComponent } from "../../modules/admin/admin-order/admin-order-export/admin-order-export.component";
+import { AdminOrderStatsComponent } from "../../modules/admin/admin-order/admin-order-stats/admin-order-stats.component";
 
 @NgModule({
 	declarations: [
@@ -38,7 +39,8 @@ import { AdminOrderExportComponent } from "../../modules/admin/admin-order/admin
 		AdminReviewComponent,
 		AdminOrderComponent,
 		AdminOrderUpdateComponent,
-		AdminOrderExportComponent
+		AdminOrderExportComponent,
+		AdminOrderStatsComponent
 	],
 	imports: [
 		CommonModule,

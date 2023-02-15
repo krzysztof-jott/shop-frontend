@@ -35,4 +35,9 @@ export class AdminOrderService {
 		return this.http.get(`/api/admin/orders/export?from=${from}&to=${to}&orderStatus=${orderStatus}`,
 			  {responseType: 'blob', observe: 'response'});
 	}
+
+	// 24.0 dodaję metodę i wywołuję w AfterViewInit:
+	getSalesStatistics(): Observable<any> {
+		return this.http.get("/api/admin/orders/stats")
+	}
 }
