@@ -32,11 +32,16 @@ export class AdminLoginComponent implements OnInit {
     if (this.formGroup.valid) {
       this.adminLoginService.login(this.formGroup.value)
               .subscribe({ // obsługa błędów:
-                // 14.4 dodaję respons do lambdy:
-                next: (respons) => {
+                // 14.4 dodaję response do lambdy:
+                next: (response) => {
                   this.loginError = false;
-                  // 14.3 tu gdzie poprawny rezultat ustawiam tokena:
-                  this.jwtService.setToken(respons.token);
+                  // 35.0
+                  if (response.adminAccess) {
+                    // 14.3 tu gdzie poprawny rezultat ustawiam tokena:
+                    this.jwtService.setToken(response.token);
+                    // 37.0 dodaję:
+                    this.jwtService.setAdminAccess(true);
+                  }
                   // 15.1 robię przekekierowanie po poprawnym logowaniu:
                   this.router.navigate(["/admin"]);
                 },
