@@ -1,30 +1,27 @@
 <h1>Zamówienia</h1>
 
-<!--7.2 wklejam podsumowanie:-->
 <div *ngIf="orderSummary" class="orderSummary">
 	<div>Nowe zamówienie o numerze: {{ orderSummary.id }}</div>
 	<div>Data złożenia: {{ orderSummary.placeDate | date: 'yyyy-MM-dd HH:mm' }}</div>
 	<div>Status: {{ getStatus(orderSummary.status) }}</div>
 	<div>Wartość: {{ orderSummary.grossValue }} PLN</div>
-<!--	29.0 jeśli jest notatka to wyświetla:-->
-<!--	31.0 dodaję dyrektywę innerHTML:-->
 	<div *ngIf="orderSummary.payment.note">Płatność:
 		<br>
-		<span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span></div>
+		<span class="paymentNote" [innerHTML]="orderSummary.payment.note | replace: '\n': '\<br>'"></span>
+	</div>
+	<div *ngIf="isLoggedIn">Status zamówienia możesz śledzić na stornie swojego
+		<a routerLink="/profile">profilu</a>.
+	</div>
 </div>
 
-<!--3.6 jeśli koszyk jest pusty to:-->
-<!--7.3 dodaję do warunku orderSummary i niżej tak samo:-->
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length <= 0">
 	Koszyk jest pusty, nie możesz zrealizować zamówienia
 </div>
 
-<!--3.7 jeśli coś w nim jest to:-->
 <div *ngIf="!orderSummary && cartSummary && cartSummary.items.length > 0">
-<!--		5.0 wklejam szablon formularza:-->
-<!--	6.1 dodaję metodę submit():-->
 	<form [formGroup]="formGrup" (submit)="submit()">
-		<div fxLayout="column" class="orderForm">
+		<div fxLayout="row" fxLayoutGap="15px">
+			<div fxLayout="column" class="orderForm">
 				<mat-form-field appearance="fill">
 					<mat-label>Imię</mat-label>
 					<input matInput placeholder="Podaj imię" formControlName="firstname">
@@ -92,8 +89,12 @@
 					</div>
 				</mat-form-field>
 			</div>
+<!--			46.0 dodaję dyrektywę ngIf, info ma się wyświetlać tylko dla niezalogowanych użytkowników:-->
+			<div class="loginInfo" *ngIf="!isLoggedIn">
+				<a routerLink="/login">Zaloguj się</a>, żeby śledzić swoje zamówienie
+			</div>
+		</div>
 			<div>
-<!--				6.0 wklejam kod wyświetlający zawartość koszyka:-->
 				<div fxLayoutGap="25px grid">
 					<div>
 						<h2>Zamawiasz:</h2>
@@ -121,7 +122,7 @@
 							<div class="summary"> Wartość: </div>
 							<div class="summary"> <b>{{cartSummary?.summary?.grossValue}}</b></div>
 						</div>
-<!--						17.2 dodaję dostawę i radio batony:-->
+
 						<div>
 							<h2>Dostawa</h2>
 							<mat-radio-group fxLayout="column" formControlName="shipment">
@@ -132,7 +133,7 @@
 								</mat-radio-button>
 							</mat-radio-group>
 						</div>
-<!--						26.0 dodaję płatność-->
+
 						<div>
 							<h2>Płatność</h2>
 							<mat-radio-group fxLayout="column" formControlName="payment">
@@ -141,14 +142,14 @@
 								</mat-radio-button>
 							</mat-radio-group>
 						</div>
-<!--						20.0 podsumowanie:-->
+
 						<div fxLayoutAlign="end">
 							<div class="orderTotal">Całkowita kwota do zapłaty:
 								<span class="orderTotalValue">{{ cartSummary?.summary?.grossValue +
 								shipment?.value.price }} PLN</span>
 							</div>
 						</div>
-<!--						43.1 dodaję info o błędach:-->
+
 						<div *ngIf="errorMessage" class="errorMessage" fxLayoutAlign="end start">
 							Coś poszło źle, spróbuj ponownie później.
 						</div>

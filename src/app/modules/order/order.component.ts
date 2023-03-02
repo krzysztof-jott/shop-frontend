@@ -7,6 +7,7 @@ import { OrderDto } from "./model/orderDto";
 import { OrderSummary } from "./model/orderSummary";
 import { InitData } from "./model/initData";
 import { CartIconService } from "../common/service/cart-icon.service";
+import { JwtService } from "../common/service/jwt.service";
 
 @Component({
   selector: 'app-order',
@@ -21,6 +22,7 @@ export class OrderComponent implements OnInit {
   orderSummary!: OrderSummary;
   initData!: InitData;
   errorMessage = false;
+  isLoggedIn = false;
 
   private statuses = new Map<string, string>([
     ["NEW", "Nowe"],
@@ -31,7 +33,8 @@ export class OrderComponent implements OnInit {
               private orderService: OrderService,
               // 5.2 wstrzykuję buildera:
               private formBuilder: FormBuilder,
-              private cartIconService: CartIconService) { }
+              private cartIconService: CartIconService,
+              private jwtService: JwtService) { }
 
   ngOnInit(): void { // 2.1 teraz tu:
     this.checkCartEmpty();
@@ -48,6 +51,8 @@ export class OrderComponent implements OnInit {
       payment: ['', Validators.required]
     });
     this.getInitData();
+    // 45.0: ustawiam pole:
+    this.isLoggedIn = this.jwtService.isLoggedIn();
 
   }
   // 2.0 tworzę metodę:
