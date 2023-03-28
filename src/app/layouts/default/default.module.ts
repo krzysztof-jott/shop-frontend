@@ -31,7 +31,7 @@ import { ProfileComponent } from "../../modules/profile/profile.component";
 		RouterModule,
 		SharedModule,
 		FlexLayoutModule,
-		ReactiveFormsModule,
+		ReactiveFormsModule
 	]
 })
 export class DefaultModule { }

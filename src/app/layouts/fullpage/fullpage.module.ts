@@ -6,12 +6,14 @@ import { SharedModule } from "../../shared/shared.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { LoginComponent } from "../../modules/login/login.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { LostPasswordComponent } from "../../modules/login/lost-password/lost-password.component";
 
 @NgModule({
-  declarations: [
-      FullpageComponent,
-      LoginComponent
-  ],
+	declarations: [
+		FullpageComponent,
+		LoginComponent,
+		LostPasswordComponent
+	],
 	imports: [
 		CommonModule,
 		RouterModule,
