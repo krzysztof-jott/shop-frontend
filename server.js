@@ -3,11 +3,11 @@ const path = require('path');
 const proxy = require('http-proxy-middleware');
 const app = express();
 
-const apiProxy = proxy.createProxyMiddleware('/api', {
+const apiProxy = proxy.createProxyMiddleware("/api", {
       target: 'https://aplikacja-shop-backend.herokuapp.com/',
       changeOrigin: true,
       pathRewrite: {
-            '^/api': '/',
+            '^/api':''
       }
 });
 app.use(apiProxy);
