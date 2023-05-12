@@ -6,6 +6,7 @@ export interface Product { // interfejs służy za klasę data, dzięki niemu b�
    description: string;
    // fullDescription: string;
    price: number;
+   salePrice: number;
    currency: string;
    image: string;
    slug: string;

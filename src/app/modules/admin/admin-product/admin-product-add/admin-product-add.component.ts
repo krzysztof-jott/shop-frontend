@@ -34,6 +34,7 @@ export class AdminProductAddComponent implements OnInit {
                         fullDescription: [''],
                         categoryId: ['', [Validators.required]], // zostawiam tylko pole wymagane
                         price: ['', [Validators.required, Validators.min(0)]], // minimalna liczba
+                        salePrice: ['', Validators.min(0)], // minimalna liczba
                         currency: ['PLN', Validators.required],
                         slug: ['', [Validators.required, Validators.minLength(4)]]
                 });
@@ -49,6 +50,7 @@ export class AdminProductAddComponent implements OnInit {
                                 fullDescription: this.productForm.get('fullDescription')?.value,
                                 categoryId: this.productForm.get('categoryId')?.value,
                                 price: this.productForm.get('price')?.value,
+                                salePrice: this.productForm.get('salePrice')?.value,
                                 currency: this.productForm.get('currency')?.value,
                                 image: this.image,
                                 slug: this.productForm.get('slug')?.value,

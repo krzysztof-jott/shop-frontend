@@ -35,8 +35,9 @@ export class AdminProductUpdateComponent implements OnInit {
                         name: ['', [Validators.required, Validators.minLength(4)]],
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         fullDescription: [''],
-                        categoryId: ['', [Validators.required]], // zostawiam tylko pole wymagane
+                        categoryId: ['', Validators.required], // zostawiam tylko pole wymagane
                         price: ['', [Validators.required, Validators.min(0)]],
+                        salePrice: ['', Validators.min(0)],
                         currency: ['PLN', Validators.required],
                         slug: ['', [Validators.required, Validators.minLength(4)]]
                 });
@@ -60,6 +61,7 @@ export class AdminProductUpdateComponent implements OnInit {
                         // 17.2 tu też Id dodaję
                         categoryId: this.productForm.get('categoryId')?.value,
                         price: this.productForm.get('price')?.value,
+                        salePrice: this.productForm.get('salePrice')?.value,
                         currency: this.productForm.get('currency')?.value,
                         image: this.image,
                         slug: this.productForm.get('slug')?.value,
@@ -95,6 +97,7 @@ export class AdminProductUpdateComponent implements OnInit {
                         fullDescription: product.fullDescription,
                         categoryId: product.categoryId,
                         price: product.price,
+                        salePrice: product.salePrice,
                         currency: product.currency,
                         slug: product.slug
                         });

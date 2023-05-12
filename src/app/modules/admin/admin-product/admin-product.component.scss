@@ -1,7 +1,5 @@
 table{  // dodaję globalny styl dla tabel:
     width: 100%;
-    font-family: "Segoe UI Black", serif;
-    background: slategrey;
 }
 .mat-column-id{ // ustawia szerokość kolumny:
     width: 60px;
@@ -12,7 +10,7 @@ mat-column-actions{
 .mat-column-image{
     width: 155px;
 }
-.content{
-    background: red;
-    color: red;
+.salePrice {
+    color: green;
+    font-weight: 700;
 }
