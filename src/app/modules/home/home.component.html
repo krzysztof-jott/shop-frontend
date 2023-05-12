@@ -1,1 +1,27 @@
-<p>home works!</p>
+<h1>Promowane produkty</h1>
+
+<mat-card *ngFor="let product of homePageData?.saleProducts">
+	<div fxLayout="row">
+		<div fxLayout="column" fxFlex>
+			<mat-card-title><a routerLink="{{'/products/' + product.slug}}">{{product.name}}</a></mat-card-title>
+			<mat-card-subtitle>{{product.category}}</mat-card-subtitle>
+			<div fxLayout="row">
+				<a routerLink="{{'/products/' + product.slug}}">
+					<img *ngIf="!product?.image" mat-card-lg-image class="productImage" src="/assets/image-placeholder.png">
+					<img *ngIf="product?.image" mat-card-lg-image class="productImage" src="{{'/api/data/productImage/' + product?.image}}" >
+				</a>
+				<mat-card-content fxFlex class="productContent">{{product.description}}</mat-card-content>
+				<!--				<mat-card-content fxFlex class="productContent">{{product.fullDescription}}</mat-card-content>-->
+			</div>
+		</div>
+		<div>
+			<div class="productPrice" [ngClass]="{'productPriceDisable': product.salePrice}">{{product.price}} {{product.currency}}</div>
+			<div class="productSalePrice" *ngIf="product.salePrice">{{ product.salePrice }} {{ product.currency }}</div>
+		</div>
+	</div>
+	<mat-card-actions align="end" fxLayoutGap="10">
+		<button mat-flat-button color="warn" routerLink="{{'/products/' + product.slug}}">Pokaż</button>
+		<!--		12.0 dodaję link:-->
+		<button mat-flat-button color="accent" routerLink="/cart" [queryParams]="{productId: product?.id}">Do koszyka</button>
+	</mat-card-actions>
+</mat-card>

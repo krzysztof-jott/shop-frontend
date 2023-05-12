@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HomePageDto } from "./model/homePageDto";
+import { HomeService } from "./home.service";
 
 @Component({
   selector: 'app-home',
@@ -7,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  homePageData!: HomePageDto;
+
+  constructor(private homeService: HomeService) { }
 
   ngOnInit(): void {
+    this.getHomePageData();
+  }
+
+  getHomePageData() {
+    this.homeService.getHomePageData()
+            .subscribe(homePageData => this.homePageData = homePageData);
   }
 }
