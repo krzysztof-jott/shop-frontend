@@ -18,7 +18,8 @@ export class AdminCategoryComponent implements OnInit {
 
     constructor(private adminCategoryService: AdminCategoryService,
                 private dialogService: AdminConfirmDialogService
-    ) { }
+    ) {
+    }
 
     ngOnInit(): void {
         this.getCategories();
@@ -26,24 +27,24 @@ export class AdminCategoryComponent implements OnInit {
 
     getCategories() {
         this.adminCategoryService.getCategories()
-            .subscribe(categories => this.dataSource = categories);
+                .subscribe(categories => this.dataSource = categories);
     }
 
     confirmDelete(element: AdminCategoryNameDto) {
         this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć kategorię?")
-            .afterClosed()
-            .subscribe(result => {
-                if (result) {
-                    this.adminCategoryService.delete(element.id) // z elementu wyciągam id
-                        .subscribe(() => {
-                            this.dataSource.forEach((value, index) => {
-                                if (element == value) {
-                                    this.dataSource.splice(index, 1)
-                                    this.table.renderRows(); // potrzebna referencja do tabeli, dodaję u góry
-                                }
-                            })
-                        });
-                }
-            });
+                .afterClosed()
+                .subscribe(result => {
+                    if (result) {
+                        this.adminCategoryService.delete(element.id)
+                                .subscribe(() => {
+                                    this.dataSource.forEach((value, index) => {
+                                        if (element == value) {
+                                            this.dataSource.splice(index, 1)
+                                            this.table.renderRows();
+                                        }
+                                    })
+                                });
+                    }
+                });
     }
 }

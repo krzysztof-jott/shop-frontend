@@ -16,10 +16,9 @@ export class AdminLoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private adminLoginService: AdminLoginService,
-              // 14.2 wstrzykuję:
               private jwtService: JwtService,
-              // 15.0
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -31,18 +30,13 @@ export class AdminLoginComponent implements OnInit {
   submit() {
     if (this.formGroup.valid) {
       this.adminLoginService.login(this.formGroup.value)
-              .subscribe({ // obsługa błędów:
-                // 14.4 dodaję response do lambdy:
+              .subscribe({
                 next: (response) => {
                   this.loginError = false;
-                  // 35.0
                   if (response.adminAccess) {
-                    // 14.3 tu gdzie poprawny rezultat ustawiam tokena:
                     this.jwtService.setToken(response.token);
-                    // 37.0 dodaję:
                     this.jwtService.setAdminAccess(true);
                   }
-                  // 15.1 robię przekekierowanie po poprawnym logowaniu:
                   this.router.navigate(["/admin"]);
                 },
                 error: () => this.loginError = true

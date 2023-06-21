@@ -1,3 +1,3 @@
 export interface UploadResponse {
-	  filename: string;
+	filename: string;
 }

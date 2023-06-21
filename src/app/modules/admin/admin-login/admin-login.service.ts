@@ -7,7 +7,8 @@ import { Observable } from "rxjs";
 })
 export class AdminLoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   login(credential: any): Observable<any> {
     return this.http.post("/api/login", credential);

@@ -8,22 +8,22 @@ import { FlexModule } from "@angular/flex-layout";
 import { MaterialModule } from "./material.module";
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        SidebarComponent,
-        FooterComponent
-    ],
+	declarations: [
+		HeaderComponent,
+		SidebarComponent,
+		FooterComponent
+	],
 	imports: [
 		CommonModule,
 		RouterModule,
 		FlexModule,
 		MaterialModule
 	],
-    exports: [
-        HeaderComponent,
-        SidebarComponent,
-        FooterComponent,
-        MaterialModule
-    ]
+	exports: [
+		HeaderComponent,
+		SidebarComponent,
+		FooterComponent,
+		MaterialModule
+	]
 })
 export class SharedModule { }

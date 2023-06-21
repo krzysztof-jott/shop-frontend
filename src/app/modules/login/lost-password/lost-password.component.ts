@@ -19,7 +19,8 @@ export class LostPasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private snackBar: MatSnackBar,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -50,16 +51,19 @@ export class LostPasswordComponent implements OnInit {
   sendChangePassword() {
     if (this.formGroupChangePassword.valid && this.passwordIdentical(this.formGroupChangePassword.value)) {
       this.loginService.changePassword({
-        password: this.formGroupChangePassword.get("password")?.value,
-        repeatPassword: this.formGroupChangePassword.get("repeatPassword")?.value,
-        hash: this.hash
-      })
+                password: this.formGroupChangePassword.get("password")?.value,
+                repeatPassword: this.formGroupChangePassword.get("repeatPassword")?.value,
+                hash: this.hash
+              })
               .subscribe({
                 next: () => {
                   this.formChangePasswordError = ""
                   this.formGroupChangePassword.reset();
-                  this.snackBar.open('Hasło zostało zmienione', '', { duration: 3000, panelClass: "snack-bar-bg-color-ok" });
-                  },
+                  this.snackBar.open('Hasło zostało zmienione', '', {
+                    duration: 3000,
+                    panelClass: "snack-bar-bg-color-ok"
+                  });
+                },
                 error: err => this.formChangePasswordError = err.error.message
               });
     }

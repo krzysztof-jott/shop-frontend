@@ -9,7 +9,8 @@ import { AdminCategory } from "./model/AdminCategory";
 })
 export class AdminCategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCategories(): Observable<Array<AdminCategoryNameDto>> {
     return this.http.get<Array<AdminCategoryNameDto>>("/api/admin/categories")

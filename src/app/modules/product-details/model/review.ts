@@ -1,5 +1,5 @@
 export interface Review {
-      productId: number;
-      authorName: string;
-      content: string;
+	productId: number;
+	authorName: string;
+	content: string;
 }

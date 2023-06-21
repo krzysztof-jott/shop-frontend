@@ -1,6 +1,6 @@
 :host {
-    display: flex; // bez tego flexLayout nie zadziała
-    flex-direction: column; // wyznacza kierunek layoutu na kolumnowy
+    display: flex;
+    flex-direction: column;
     height: 100%;
     margin: 0 auto;
     div {

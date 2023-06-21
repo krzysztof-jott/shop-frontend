@@ -11,7 +11,8 @@ export class SidebarComponent implements OnInit {
 
   categories: Array<SidebarCategory> = [];
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(private sidebarService: SidebarService) {
+  }
 
   ngOnInit(): void {
     this.getCategories();
@@ -19,6 +20,6 @@ export class SidebarComponent implements OnInit {
 
   getCategories() {
     this.sidebarService.getCategories()
-        .subscribe(categories => this.categories = categories);
+            .subscribe(categories => this.categories = categories);
   }
 }

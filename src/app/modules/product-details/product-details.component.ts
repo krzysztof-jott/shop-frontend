@@ -19,10 +19,10 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
           private productDetailsService: ProductDetailsService,
           private router: ActivatedRoute,
-          // 45.4 wstrzykuję Buildera:
           private formBuilder: FormBuilder,
           private snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getProductDetails();
@@ -34,14 +34,14 @@ export class ProductDetailsComponent implements OnInit {
 
   getProductDetails() {
     let slug = this.router.snapshot.params['slug'];
-     this.productDetailsService.getProductDetails(slug)
-              .subscribe(product => this.product = product);
+    this.productDetailsService.getProductDetails(slug)
+            .subscribe(product => this.product = product);
   }
 
   submit() {
     if (this.reviewForm.valid) {
       this.productDetailsService.saveProductReview({
-        authorName: this.reviewForm.get("authorName")?.value, // pole może być puste więc potrzebny znak zapytania
+        authorName: this.reviewForm.get("authorName")?.value,
         content: this.reviewForm.get("content")?.value,
         productId: this.product.id
       } as Review).subscribe(review => {

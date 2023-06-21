@@ -17,7 +17,6 @@ import { JwtService } from "../common/service/jwt.service";
 export class OrderComponent implements OnInit {
 
   cartSummary!: CartSummary;
-  // 5.1 dodaję pole:
   formGrup!: FormGroup;
   orderSummary!: OrderSummary;
   initData!: InitData;
@@ -31,14 +30,13 @@ export class OrderComponent implements OnInit {
 
   constructor(private cookieService: CookieService,
               private orderService: OrderService,
-              // 5.2 wstrzykuję buildera:
               private formBuilder: FormBuilder,
               private cartIconService: CartIconService,
-              private jwtService: JwtService) { }
+              private jwtService: JwtService) {
+  }
 
-  ngOnInit(): void { // 2.1 teraz tu:
+  ngOnInit(): void {
     this.checkCartEmpty();
-    // 5.3 dodaję definicję formularza i walidatory, muszę dodać gettery:
     this.formGrup = this.formBuilder.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -51,42 +49,34 @@ export class OrderComponent implements OnInit {
       payment: ['', Validators.required]
     });
     this.getInitData();
-    // 45.0: ustawiam pole:
     this.isLoggedIn = this.jwtService.isLoggedIn();
 
   }
-  // 2.0 tworzę metodę:
+
   checkCartEmpty() {
-    // 3.5 pobieram id koszyka:
     let cartId = Number(this.cookieService.get("cartId"));
     this.orderService.getCart(cartId)
-            .subscribe(summary => this.cartSummary = summary); // przechodzę do szablonu zamówień
+            .subscribe(summary => this.cartSummary = summary);
   }
 
-  // 6.2 dodaję metodę:
   submit() {
-    if (this.formGrup.valid) { // żeby wysyłać formularz tylko jesli jest poprawnie zwalidowany
+    if (this.formGrup.valid) {
       this.orderService.placeOrder({
-        firstname: this.formGrup.get('firstname')?.value,
-        lastname: this.formGrup.get('lastname')?.value,
-        street: this.formGrup.get('street')?.value,
-        zipcode: this.formGrup.get('zipcode')?.value,
-        city: this.formGrup.get('city')?.value,
-        email: this.formGrup.get('email')?.value,
-        phone: this.formGrup.get('phone')?.value,
-        cartId: Number(this.cookieService.get("cartId")),
-        //   21.0 dodaję shipmentId:
-        shipmentId: Number(this.formGrup.get('shipment')?.value.id),
-        // 26.3 dodaję paymentId:
-        paymentId: Number(this.formGrup.get('payment')?.value.id)
-      } as OrderDto) // rzutuję do DTO
-              // 7.1 w subscribe, jeśli zamówienie zostało złożone pomyślnie, to powinienem usunąć ciastko z id koszyka. Koszyk
-              // powinien być wyczyszczony, więc robię cookie service delete:
-              // 43.0 dodaję obsługę błędów:
+                firstname: this.formGrup.get('firstname')?.value,
+                lastname: this.formGrup.get('lastname')?.value,
+                street: this.formGrup.get('street')?.value,
+                zipcode: this.formGrup.get('zipcode')?.value,
+                city: this.formGrup.get('city')?.value,
+                email: this.formGrup.get('email')?.value,
+                phone: this.formGrup.get('phone')?.value,
+                cartId: Number(this.cookieService.get("cartId")),
+                shipmentId: Number(this.formGrup.get('shipment')?.value.id),
+                paymentId: Number(this.formGrup.get('payment')?.value.id)
+              } as OrderDto)
               .subscribe({
-                next: orderSummary => { // SPRAWDZIĆ NA KONIEC MODUŁU!!!
+                next: orderSummary => {
                   this.orderSummary = orderSummary;
-                  this.cookieService.delete("cartId"); // nazwa ciastka
+                  this.cookieService.delete("cartId");
                   this.errorMessage = false;
                   this.cartIconService.cartChanged(0);
                 },
@@ -95,26 +85,22 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  // 17.1 metoda:
   getInitData() {
     this.orderService.getInitData()
             .subscribe(initData => {
               this.initData = initData;
-              // 19.0 metoda
               this.setDefaultShipment();
-              // 26.1 domyślna płatność i tworzę metodę:
               this.setDefaultPayment();
-            }); // dodaję pole u góry i wywołuję w ngOnInit
+            });
   }
 
-  private setDefaultShipment() { //19.1  filtruję listę sposobów dostawy
+  private setDefaultShipment() {
     this.formGrup.patchValue({
       "shipment": this.initData.shipments.filter(
               shipment => shipment.defaultShipment)[0]
     });
   }
 
-  // 26.2 tworzę metodę:
   private setDefaultPayment() {
     this.formGrup.patchValue({
       "payment": this.initData.payments.filter(

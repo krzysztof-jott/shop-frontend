@@ -7,11 +7,11 @@ import { Observable } from "rxjs";
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  // 25.0 implementuję metodę:
   register(register: any): Observable<any> {
-    return this.http.post("/api/register", register); // jako parametr obiekt register
+    return this.http.post("/api/register", register);
   }
 
   login(login: any): Observable<any> {

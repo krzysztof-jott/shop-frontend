@@ -13,9 +13,7 @@
 			<div fxLayout="row" fxFlexAlign="end">
 				<div class="price" [ngClass]="{'productPriceDisable': product.salePrice}">{{product.price}} {{product.currency}}</div>
 				<div class="productSalePrice" *ngIf="product.salePrice">{{ product.salePrice }} {{ product.currency }}</div>
-
 			</div>
-<!--			9.0 dodaję dyrektywę [queryParams]:-->
 			<button mat-flat-button color="warn" routerLink="/cart" [queryParams]="{productId: product?.id}">Do koszyka</button>
 		</div>
 	</div>

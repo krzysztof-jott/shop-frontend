@@ -8,7 +8,8 @@ import { AdminReview } from "./model/AdminReview";
 })
 export class AdminReviewService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getReviews(): Observable<Array<AdminReview>> {
     return this.http.get<Array<AdminReview>>("/api/admin/reviews");

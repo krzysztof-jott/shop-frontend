@@ -12,22 +12,19 @@ import { InitData } from "./model/initData";
 })
 export class OrderService {
 
-  // 3.3 wstrzykuję wydzielony serwis:
   constructor(private cartCommonService: CartCommonService,
-              private http: HttpClient) { }
+              private http: HttpClient) {
+  }
 
-  // 3.4 kopiuję metodę z serwisu i idę do komponentu order:
   getCart(id: number): Observable<CartSummary> {
     return this.cartCommonService.getCart(id);
   }
 
-  // 7.0 tworzę metodę do zapisu zamówienia, dodaję interfejsy OrderSummary i OrderDto:
-  placeOrder(order: OrderDto): Observable<OrderSummary> { // zwraca podsumowanie z zamówienia:
-    return this.http.post<OrderSummary>("/api/orders", order); // potrzebuję id zamówienia i być może datę utworzenia
+  placeOrder(order: OrderDto): Observable<OrderSummary> {
+    return this.http.post<OrderSummary>("/api/orders", order);
   }
 
-// 17.0
   getInitData(): Observable<InitData> {
-    return this.http.get<InitData>("/api/orders/initData") // muszę dodać DTO
+    return this.http.get<InitData>("/api/orders/initData")
   }
 }

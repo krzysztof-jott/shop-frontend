@@ -26,34 +26,34 @@ export class AdminProductsComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.paginator.page.pipe( // pipe to coś jak Observable, ale pozwala na nim używać dodatkowych operatorów
-            startWith({}),
-            switchMap(() => {
-                return this.adminProductService.getProducts(this.paginator.pageIndex, this.paginator.pageSize);
-            }),
+        this.paginator.page.pipe(
+                startWith({}),
+                switchMap(() => {
+                    return this.adminProductService.getProducts(this.paginator.pageIndex, this.paginator.pageSize);
+                }),
         ).subscribe(data => {
             this.totalElements = data.totalElements;
             this.dataSource = data.content;
-        }) // teraz zaczęło działać stronicowanie
+        })
     }
 
     confirmDelete(element: AdminProduct) {
         this.dialogService.openConfirmDialog("Czy na pewno chcesz usunąć produkt?")
-            .afterClosed()
-            .subscribe(result => {
-                if (result) {
-                    this.adminProductService.delete(element.id) // z elementu wyciągam id
-                        .subscribe(() => {
-                            this.dataSource.forEach((value, index) => { // watość elementu i indeks elementu z tablicy
-                                if (element == value) { // element, który mam, przyrównuję do każdego kolejnego elementu
-                                    this.dataSource.splice(index, 1) // 1 - ilość elementów do usunięcia
-                                    this.table.renderRows(); // jeśli usuwamy dane z tablicy, trzeba zrobić renderowanie wierszy
-                                }
-                            })
-                        })
-                    ;
-                }
-            })
+                .afterClosed()
+                .subscribe(result => {
+                    if (result) {
+                        this.adminProductService.delete(element.id)
+                                .subscribe(() => {
+                                    this.dataSource.forEach((value, index) => {
+                                        if (element == value) {
+                                            this.dataSource.splice(index, 1)
+                                            this.table.renderRows();
+                                        }
+                                    })
+                                })
+                        ;
+                    }
+                })
         ;
     }
 }

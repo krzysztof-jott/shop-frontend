@@ -9,7 +9,8 @@ import { Page } from "../../common/model/page";
 })
 export class AdminOrderService {
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) {
+	}
 
 	getOrders(pageIndex: number, pageSize: number): Observable<Page<AdminOrder>> {
 		return this.http.get<Page<AdminOrder>>(`/api/admin/orders?page=${pageIndex}&size=${pageSize}`);
@@ -19,24 +20,19 @@ export class AdminOrderService {
 		return this.http.get<AdminOrder>("/api/admin/orders/" + id);
 	}
 
-	// 2.0
 	saveStatus(id: number, value: any): Observable<void> {
 		return this.http.patch<void>("/api/admin/orders/" + id, value);
 	}
 
-	// 5.1 deklaruję metodę. Muszę sprawić, żeby zwracała odpowiedniego obserwejbla:
 	getInitData(): Observable<any> {
 		return this.http.get<any>("/api/admin/orders/initData");
 	}
 
-	// 15.3:
-	exportOrders(from: string, to: string, orderStatus: string): Observable<any> { // 21.0 dodaję tablicę konfiguracyjną
-		// i usuwam z get generyka:
+	exportOrders(from: string, to: string, orderStatus: string): Observable<any> {
 		return this.http.get(`/api/admin/orders/export?from=${from}&to=${to}&orderStatus=${orderStatus}`,
 			  {responseType: 'blob', observe: 'response'});
 	}
 
-	// 24.0 dodaję metodę i wywołuję w AfterViewInit:
 	getSalesStatistics(): Observable<any> {
 		return this.http.get("/api/admin/orders/stats")
 	}

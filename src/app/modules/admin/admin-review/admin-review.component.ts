@@ -18,7 +18,8 @@ export class AdminReviewComponent implements OnInit {
 	constructor(
 		  private adminReviewService: AdminReviewService,
 		  private dialogService: AdminConfirmDialogService
-	) { }
+	) {
+	}
 
 	ngOnInit(): void {
 		this.getReviews();

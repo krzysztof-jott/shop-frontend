@@ -4,12 +4,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Page } from "../common/model/page";
 
-@Injectable({ // ten dekorator oznacza, że można ten serwis wstrzykiwać w dowolne miejsce
+@Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getProducts(page: number, size: number): Observable<Page<Product>> {
     return this.http.get<Page<Product>>(`/api/products?page=${page}&size=${size}`);

@@ -8,7 +8,8 @@ import { SidebarCategory } from "./model/sidebarCategory";
 })
 export class SidebarService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCategories(): Observable<Array<SidebarCategory>> {
     return this.http.get<Array<SidebarCategory>>("/api/categories");

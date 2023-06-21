@@ -10,21 +10,22 @@ import { PageEvent } from "@angular/material/paginator";
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit, OnDestroy{
+export class CategoryComponent implements OnInit, OnDestroy {
 
   categoryProducts!: CategoryProducts;
 
-  private sub!: Subscription;// Subscription to obiekt, który zwraca mi metoda subscribe.
+  private sub!: Subscription;
 
   constructor(private categoryService: CategoryService,
               private route: ActivatedRoute,
               private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.sub = this.router.events.pipe( // robię pipe na Obserwejblu (dzięku pajpowi można używać operatorów - filter)
-        filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => this.getCategoryWithProducts(0, 10)); // wywołuję odświeżenie danych
+    this.sub = this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => this.getCategoryWithProducts(0, 10));
 
     this.getCategoryWithProducts(0, 10);
   }
@@ -36,7 +37,7 @@ export class CategoryComponent implements OnInit, OnDestroy{
   getCategoryWithProducts(page: number, size: number) {
     let slug = this.route.snapshot.params['slug'];
     this.categoryService.getCategoryWithProducts(slug, page, size)
-        .subscribe(categoryProducts => this.categoryProducts = categoryProducts);
+            .subscribe(categoryProducts => this.categoryProducts = categoryProducts);
   }
 
   onPageChange(event: PageEvent) {

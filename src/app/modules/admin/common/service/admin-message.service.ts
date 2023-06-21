@@ -9,7 +9,8 @@ export class AdminMessageService {
   messages: Array<string> = [];
   subject = new Subject<Array<string>>();
 
-  constructor() { }
+  constructor() {
+  }
 
   add(message: string): void {
     this.clear();
@@ -24,7 +25,7 @@ export class AdminMessageService {
 
   addSpringErrors(error: any): void {
     this.clear();
-    this.extractMessages(error); // wydzieliłem metodę
+    this.extractMessages(error);
     this.subject.next(this.messages);
   }
 
@@ -34,7 +35,7 @@ export class AdminMessageService {
         this.messages.push("Pole: " + message.field + " -> " + message.defaultMessage);
       }
     } else {
-      this.messages.push(error.message); // ogólny komunikat błędu
+      this.messages.push(error.message);
     }
   }
 }

@@ -6,16 +6,15 @@ import jwtDecode from "jwt-decode";
 })
 export class JwtService {
 
-  // 36.0 dodaję flagę:
   adminAccess = false;
 
-  constructor() { }
+  constructor() {
+  }
 
-  // 14.0 zapis tokena:
   setToken(token: string) {
     localStorage.setItem("token", token);
   }
-  // 14.1 odczyt tokena:
+
   getToken(): string | null {
     return localStorage.getItem("token");
   }
@@ -26,12 +25,10 @@ export class JwtService {
   }
 
   private notExpired(token: string) {
-    let tokenDecoded = jwtDecode<any>(token); // dodaję any, bo jest błąd w return tokenDecoded
-    // całość musi być większa od czasu jaki jest teraz:
+    let tokenDecoded = jwtDecode<any>(token);
     return (tokenDecoded.exp * 1000) > new Date().getTime();
   }
 
-  // 36.1 getter i setter
   public setAdminAccess(adminAccess: boolean) {
     this.adminAccess = adminAccess;
   }

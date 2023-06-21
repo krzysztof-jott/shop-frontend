@@ -11,7 +11,8 @@ export class HomeComponent implements OnInit {
 
   homePageData!: HomePageDto;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService) {
+  }
 
   ngOnInit(): void {
     this.getHomePageData();

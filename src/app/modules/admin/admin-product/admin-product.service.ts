@@ -9,13 +9,14 @@ import { AdminProduct } from "./model/adminProduct";
 })
 export class AdminProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getProducts(page: number, size: number): Observable<Page<AdminProduct>> {
     return this.http.get<Page<AdminProduct>>(`/api/products?page=${page}&size=${size}`);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>('/api/admin/products/' + id); // void, bo po usuwaniu nic nie zwracamy
+    return this.http.delete<void>('/api/admin/products/' + id);
   }
 }

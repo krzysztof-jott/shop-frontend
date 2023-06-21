@@ -8,7 +8,8 @@ import { AdminCategoryNameDto } from "../../common/dto/AdminCategoryNameDto";
 })
 export class FormCategoryService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCategories(): Observable<Array<AdminCategoryNameDto>> {
     return this.http.get<Array<AdminCategoryNameDto>>("/api/admin/categories")

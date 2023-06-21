@@ -7,10 +7,10 @@ import { Observable } from "rxjs";
 })
 export class HeaderService {
 
-  constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) {
+  }
 
-//   20.0 dodaję metodę:
   getCountProducts(cartId: number): Observable<Number> {
-    return this.http.get<Number>("/api/cartItems/count/" + cartId); // cartId pobieram z cookie
+    return this.http.get<Number>("/api/cartItems/count/" + cartId);
   }
 }

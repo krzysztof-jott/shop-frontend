@@ -26,7 +26,8 @@ export class CartComponent implements OnInit {
               private formBuilder: FormBuilder,
               private cartIconService: CartIconService,
               private location: Location
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     let id = Number(this.route.snapshot.queryParams['productId']);
@@ -60,15 +61,15 @@ export class CartComponent implements OnInit {
             .subscribe(summary => {
               this.summary = summary;
               this.patchFormItems();
-              this.cartIconService.cartChanged(summary.items.length); // teraz widać ile elementów jest w koszyku
-              this.cookieService.delete("cartId"); // usuwam cookie przed każdym ustawieniem
+              this.cartIconService.cartChanged(summary.items.length);
+              this.cookieService.delete("cartId");
               this.cookieService.set("cartId", summary.id.toString(), this.expiresDays(3));
               this.router.navigate(["/cart"]);
             });
   }
 
   patchFormItems() {
-    let formItems = <FormArray>this.formGroup.get("items"); // pobieram z formularza referencję do putego elementu (z OnInit)
+    let formItems = <FormArray>this.formGroup.get("items");
     this.summary.items.forEach(item => {
       formItems.push(this.formBuilder.group({
         id: [item.id],

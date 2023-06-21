@@ -7,5 +7,5 @@ export interface AdminOrderRow {
 	product: AdminProductDto,
 	quantity: number,
 	price: number,
-	shipment: AdminShipmentDto
+	shipment: AdminShipmentDto;
 }

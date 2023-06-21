@@ -6,12 +6,11 @@ import { Subject } from "rxjs";
 })
 export class CartIconService {
 
-  // 21.0 dodaję pole:
   subject: Subject<Number> = new Subject();
 
-  constructor() { }
+  constructor() {
+  }
 
-  // 21.1 dodaję metodę i wracam do komponentu header:
   cartChanged(counter: number) {
     this.subject.next(counter);
   }

@@ -15,12 +15,11 @@ export class ProfileComponent implements OnInit {
   displayedColumns = ["id", "placeDate", "orderStatus", "grossValue"];
 
   constructor(private profileService: ProfileService,
-              // 59.0
               private jwtService: JwtService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    // 59.1 jeśli nie jest zalogowany to przekirowuję do formularza logowania:
     if (!this.jwtService.isLoggedIn()) {
       this.router.navigate(["/login"]);
     }

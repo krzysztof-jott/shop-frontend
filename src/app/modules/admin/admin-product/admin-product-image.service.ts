@@ -8,7 +8,8 @@ import { HttpClient } from "@angular/common/http";
 })
 export class AdminProductImageService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   uploadImage(formData: FormData): Observable<UploadResponse> {
     return this.http.post<UploadResponse>('/api/admin/products/upload-image', formData);

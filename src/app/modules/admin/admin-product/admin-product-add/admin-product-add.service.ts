@@ -12,8 +12,8 @@ export class AdminProductAddService {
   constructor(private http: HttpClient) {
   }
 
-  saveNewProduct(product: AdminProductUpdate): Observable<AdminProductUpdate> { // zwraca obserwejbla z AdminProductUpdate
-    return this.http.post<AdminProductUpdate>("/api/admin/products", product); // jako body przesyłam product
+  saveNewProduct(product: AdminProductUpdate): Observable<AdminProductUpdate> {
+    return this.http.post<AdminProductUpdate>("/api/admin/products", product);
   }
 
   uploadImage(formData: FormData): Observable<UploadResponse> {

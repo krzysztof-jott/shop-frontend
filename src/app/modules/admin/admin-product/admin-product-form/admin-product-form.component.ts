@@ -19,7 +19,7 @@ import { FormCategoryService } from "./form-category.service";
                     </div>
                 </div>
             </mat-form-field>
-            
+
             <mat-form-field appearance="fill">
                 <mat-label>Przyjazny url</mat-label>
                 <input matInput placeholder="Podaj url" formControlName="slug">
@@ -32,7 +32,7 @@ import { FormCategoryService } from "./form-category.service";
                     </div>
                 </div>
             </mat-form-field>
-            
+
             <mat-form-field appearance="fill">
                 <mat-label>Opis</mat-label>
                 <textarea matInput rows="2" placeholder="Podaj opis produktu" formControlName="description"></textarea>
@@ -48,7 +48,8 @@ import { FormCategoryService } from "./form-category.service";
 
             <mat-form-field appearance="fill">
                 <mat-label>Pełny opis</mat-label>
-                <textarea matInput rows="4" placeholder="Podaj pełny opis produktu" formControlName="fullDescription"></textarea>
+                <textarea matInput rows="4" placeholder="Podaj pełny opis produktu"
+                          formControlName="fullDescription"></textarea>
             </mat-form-field>
 
             <mat-form-field appearance="fill">
@@ -64,7 +65,7 @@ import { FormCategoryService } from "./form-category.service";
                     </div>
                 </div>
             </mat-form-field>
-            
+
             <mat-form-field appearance="fill">
                 <mat-label>Cena</mat-label>
                 <input matInput placeholder="Podaj cenę produktu" formControlName="price">
@@ -124,30 +125,37 @@ export class AdminProductFormComponent implements OnInit {
 
     getCategories() {
         this.formCategoryService.getCategories()
-            .subscribe(categories => this.categories = categories)
+                .subscribe(categories => this.categories = categories)
     }
 
     get name() {
         return this.parentForm.get("name");
     }
+
     get description() {
         return this.parentForm.get("description");
     }
+
     get fullDescription() {
         return this.parentForm.get("fullDescription");
     }
+
     get categoryId() {
         return this.parentForm.get("categoryId");
     }
+
     get price() {
         return this.parentForm.get("price");
     }
+
     get salePrice() {
         return this.parentForm.get("salePrice");
     }
+
     get currency() {
         return this.parentForm.get("currency");
     }
+
     get slug() {
         return this.parentForm.get("slug");
     }

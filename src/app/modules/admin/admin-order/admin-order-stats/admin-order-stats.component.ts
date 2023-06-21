@@ -37,32 +37,29 @@ export class AdminOrderStatsComponent implements AfterViewInit {
     ]
   } as ChartData;
 
-  constructor(private adminOrderService: AdminOrderService) { // 23.1
-    Chart.register(...registerables) // 23.0
+  constructor(private adminOrderService: AdminOrderService) {
+    Chart.register(...registerables)
   }
 
-  // 22.0 ponieważ będę się odwoływać do już stworzonego elementu (canvas) muszę skorzystać z metody AfterViewInit()
-  // zamiast OnInit():
   ngAfterViewInit(): void {
     this.setupChart();
-    this.getSalesStatistics(); // dodaję metodę prywatną
-
+    this.getSalesStatistics();
   }
-  // 22.1 robię inicjalizację wykresu:
+
   getSalesStatistics() {
     this.adminOrderService.getSalesStatistics()
-            .subscribe(stats => { // będę tu aktualizował zawartość data z setupChart()
+            .subscribe(stats => {
               this.data.labels = stats.label;
               this.data.datasets[0].data = stats.order;
               this.data.datasets[1].data = stats.sale;
-              this.chart.update(); // aktualizuje wykres
+              this.chart.update();
               this.ordersCount = stats.ordersCount;
               this.salesSum = stats.salesSum;
             });
   }
 
   setupChart() {
-    this.chart = new Chart(this.stats.nativeElement, { // canvas w Chart()
+    this.chart = new Chart(this.stats.nativeElement, {
       type: 'bar',
       data: this.data,
       options: {

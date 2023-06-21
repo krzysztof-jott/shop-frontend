@@ -9,7 +9,7 @@ import { AdminCategory } from '../model/AdminCategory';
 @Component({
   selector: 'app-admin-category-update',
   templateUrl: './admin-category-update.component.html',
-  styleUrls: ['./admin-category-update.component.scss']
+  styleUrls: ['./admin-category-update.component.scss'],
 })
 export class AdminCategoryUpdateComponent implements OnInit {
 
@@ -25,7 +25,7 @@ export class AdminCategoryUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.categoryForm = this.formBuilder.group({
       name: ["", [Validators.required, Validators.minLength(4)]],
-      description: [""], // nie ma walidacji, bo nie jest to pole wymagane
+      description: [""],
       slug: ["", [Validators.required, Validators.minLength(4)]],
     });
     this.getCategory()
@@ -39,22 +39,22 @@ export class AdminCategoryUpdateComponent implements OnInit {
 
   submit() {
     this.adminCategoryService.saveProduct(Number(this.route.snapshot.params['id']), this.categoryForm.value)
-        .subscribe({
-          next: category => { // zaktualizuje kategorię. Tworzę nową metodę do mapowania:
-            this.mapToFormValues(category);
-            this.snackBar.open("Kategoria została zapisana", "", {duration: 3000})
-          },
-          error: err => {
-            this.adminMessageService.addSpringErrors(err.error());
-          }
-        });
+            .subscribe({
+              next: category => {
+                this.mapToFormValues(category);
+                this.snackBar.open("Kategoria została zapisana", "", {duration: 3000})
+              },
+              error: err => {
+                this.adminMessageService.addSpringErrors(err.error());
+              }
+            });
   }
 
-  private mapToFormValues(category: AdminCategory) { // kopiuję z góry:
+  private mapToFormValues(category: AdminCategory) {
     this.categoryForm.setValue({
       name: category.name,
       description: category.description,
-      slug: category.slug
+      slug: category.slug,
     });
   }
 }

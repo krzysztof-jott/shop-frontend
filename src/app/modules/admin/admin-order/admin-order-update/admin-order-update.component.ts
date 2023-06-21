@@ -13,22 +13,17 @@ export class AdminOrderUpdateComponent implements OnInit {
 
   order!: AdminOrder;
   formGroup!: FormGroup;
-  // 5.2 tablica nie jest już potrzebna, usuwam:
-  // statuses = ['NEW', 'PAID', 'COMPLETED'];
-  // 5.3 zmieniam typ statusu na mapę:
   statuses!: Map<string, string>;
 
   constructor(private adminOrderService: AdminOrderService,
               private activatedRoute: ActivatedRoute,
               private formBuilder: FormBuilder
-              ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getOrder();
-    // 5.0
     this.getInitData();
-
-  //   1.3 tworzę definicję formularza:
     this.formGroup = this.formBuilder.group({
       orderStatus: ['', Validators.required]
     });
@@ -37,14 +32,13 @@ export class AdminOrderUpdateComponent implements OnInit {
   getOrder() {
     let id = Number(this.activatedRoute.snapshot.params['id']);
     this.adminOrderService.getOrder(id)
-            .subscribe(order => { // 1.4 dodaję ustawianie statusu:
+            .subscribe(order => {
               this.order = order;
               this.formGroup.setValue({
                 orderStatus: order.orderStatus
-              }) // 11.1 dodaję sortowanie po dacie utworzenia, ale muszę najpierw skonwertować daty na wartości numeryczne przez
-              // zrobienie nowego obiektu daty:
+              })
               order.orderLogs.sort((el1, el2) =>
-                      new Date(el2.created).getTime()- new Date(el1.created).getTime())
+                      new Date(el2.created).getTime() - new Date(el1.created).getTime())
             });
   }
 
@@ -54,7 +48,7 @@ export class AdminOrderUpdateComponent implements OnInit {
   }
 
   getInitData() {
-    this.adminOrderService.getInitData() // muszę zadeklarować tę metodę w serwisie
+    this.adminOrderService.getInitData()
             .subscribe(data => this.statuses = data.orderStatuses);
   }
 }

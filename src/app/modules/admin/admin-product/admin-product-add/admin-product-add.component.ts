@@ -21,22 +21,23 @@ export class AdminProductAddComponent implements OnInit {
 
         constructor(private formBuilder: FormBuilder,
                     private adminProductAddService: AdminProductAddService,
-                    private router: Router, // klasa Router pozwoli na skorzystanie z metody navigate(), która przeniesie mnie
+                    private router: Router,
                     private snackBar: MatSnackBar,
                     private adminMessageService: AdminMessageService,
                     private adminProductImageService: AdminProductImageService
-        ) { }
+        ) {
+        }
 
         ngOnInit(): void {
                 this.productForm = this.formBuilder.group({
                         name: ['', [Validators.required, Validators.minLength(4)]],
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         fullDescription: [''],
-                        categoryId: ['', [Validators.required]], // zostawiam tylko pole wymagane
-                        price: ['', [Validators.required, Validators.min(0)]], // minimalna liczba
-                        salePrice: ['', Validators.min(0)], // minimalna liczba
+                        categoryId: ['', [Validators.required]],
+                        price: ['', [Validators.required, Validators.min(0)]],
+                        salePrice: ['', Validators.min(0)],
                         currency: ['PLN', Validators.required],
-                        slug: ['', [Validators.required, Validators.minLength(4)]]
+                        slug: ['', [Validators.required, Validators.minLength(4)]],
                 });
                 this.imageForm = this.formBuilder.group({
                         file: [''],
@@ -45,7 +46,7 @@ export class AdminProductAddComponent implements OnInit {
 
         submit() {
                 this.adminProductAddService.saveNewProduct({
-                                name: this.productForm.get('name')?.value, // znak ?, żeby nie było problemów z nullem
+                                name: this.productForm.get('name')?.value,
                                 description: this.productForm.get('description')?.value,
                                 fullDescription: this.productForm.get('fullDescription')?.value,
                                 categoryId: this.productForm.get('categoryId')?.value,
@@ -74,7 +75,7 @@ export class AdminProductAddComponent implements OnInit {
         onFileChange(event: any) {
                 if (event.target.files.length > 0) {
                         this.imageForm.patchValue({
-                                file: event.target.files[0] // czyli pierwszy plik jaki wybiorę
+                                file: event.target.files[0]
                         });
                 }
         }

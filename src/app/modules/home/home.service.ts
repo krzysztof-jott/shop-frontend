@@ -8,7 +8,8 @@ import { HomePageDto } from "./model/homePageDto";
 })
 export class HomeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getHomePageData(): Observable<HomePageDto> {
     return this.http.get<HomePageDto>("/api/homePage");

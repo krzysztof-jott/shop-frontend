@@ -17,7 +17,7 @@ export class AdminProductUpdateComponent implements OnInit {
         product!: AdminProductUpdate;
         productForm!: FormGroup;
         imageForm!: FormGroup;
-        requiredFilesTypes = "image/jpeg, image/png"; // tylko takie pliki będzie można dodać
+        requiredFilesTypes = "image/jpeg, image/png";
         image: string | null = null;
 
         constructor(private router: ActivatedRoute,
@@ -31,11 +31,11 @@ export class AdminProductUpdateComponent implements OnInit {
 
         ngOnInit(): void {
                 this.getProduct();
-                this.productForm = this.formBuilder.group({ // tablica konfiguracyjna, pierwsza wartość to zawsze wartość domyślna (tutaj puste pole)
+                this.productForm = this.formBuilder.group({
                         name: ['', [Validators.required, Validators.minLength(4)]],
                         description: ['', [Validators.required, Validators.minLength(4)]],
                         fullDescription: [''],
-                        categoryId: ['', Validators.required], // zostawiam tylko pole wymagane
+                        categoryId: ['', Validators.required],
                         price: ['', [Validators.required, Validators.min(0)]],
                         salePrice: ['', Validators.min(0)],
                         currency: ['PLN', Validators.required],
@@ -43,7 +43,7 @@ export class AdminProductUpdateComponent implements OnInit {
                 });
                 this.imageForm = this.formBuilder.group({
                         file: [''],
-                })
+                });
         }
 
         getProduct() {
@@ -55,21 +55,20 @@ export class AdminProductUpdateComponent implements OnInit {
         submit() {
                 let id = Number(this.router.snapshot.params['id']);
                 this.adminProductUpdateService.saveProduct(id, {
-                        name: this.productForm.get('name')?.value, // znak ?, żeby nie było problemów z nullem
-                        description: this.productForm.get('description')?.value,
-                        fullDescription: this.productForm.get('fullDescription')?.value,
-                        // 17.2 tu też Id dodaję
-                        categoryId: this.productForm.get('categoryId')?.value,
-                        price: this.productForm.get('price')?.value,
-                        salePrice: this.productForm.get('salePrice')?.value,
-                        currency: this.productForm.get('currency')?.value,
-                        image: this.image,
-                        slug: this.productForm.get('slug')?.value,
-                } as AdminProductUpdate)
+                                name: this.productForm.get('name')?.value,
+                                description: this.productForm.get('description')?.value,
+                                fullDescription: this.productForm.get('fullDescription')?.value,
+                                categoryId: this.productForm.get('categoryId')?.value,
+                                price: this.productForm.get('price')?.value,
+                                salePrice: this.productForm.get('salePrice')?.value,
+                                currency: this.productForm.get('currency')?.value,
+                                image: this.image,
+                                slug: this.productForm.get('slug')?.value,
+                        } as AdminProductUpdate)
                         .subscribe({
                                 next: product => {
                                         this.mapFormValues(product);
-                                        this.snackBar.open("Produkt został zapisany", '', {duration: 3000}); // 3 sekundy się wyświetla
+                                        this.snackBar.open("Produkt został zapisany", '', {duration: 3000});
                                 },
                                 error: err => this.adminMessageService.addSpringErrors(err.error)
                         });
@@ -79,13 +78,13 @@ export class AdminProductUpdateComponent implements OnInit {
                 let formData = new FormData();
                 formData.append('file', this.imageForm.get('file')?.value);
                 this.adminProductImageService.uploadImage(formData)
-                          .subscribe(result => this.image = result.filename);
+                        .subscribe(result => this.image = result.filename);
         }
 
         onFileChange(event: any) {
                 if (event.target.files.length > 0) {
                         this.imageForm.patchValue({
-                                file: event.target.files[0] // czyli pierwszy plik jaki wybiorę
+                                file: event.target.files[0]
                         });
                 }
         }
@@ -99,8 +98,8 @@ export class AdminProductUpdateComponent implements OnInit {
                         price: product.price,
                         salePrice: product.salePrice,
                         currency: product.currency,
-                        slug: product.slug
-                        });
+                        slug: product.slug,
+                });
                 this.image = product.image;
         };
 }

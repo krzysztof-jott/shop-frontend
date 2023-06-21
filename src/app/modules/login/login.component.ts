@@ -21,14 +21,13 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private jwtService: JwtService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    // 38.0 dodaję warunek:
     if (this.jwtService.isLoggedIn()) {
       this.router.navigate([this.REDIRECT_ROUT]);
     }
-    // 24.0 definicje formularzy:
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -42,10 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    // 39.0
     if (this.loginForm.valid) {
-      this.loginService.login(this.loginForm.value) // tworzę metodę login() w serwisie
-              .subscribe({ // odbieranie odpowiedzi i obsługa błędów:
+      this.loginService.login(this.loginForm.value)
+              .subscribe({
                 next: response => {
                   this.jwtService.setToken(response.token);
                   this.router.navigate([this.REDIRECT_ROUT]);
@@ -56,20 +54,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // 25.1
   register() {
     if (this.registerForm.valid && this.isPasswordIdentical(this.registerForm.value)) {
       this.loginService.register(this.registerForm.value)
-              // 27.0 wypełniam, mogę zalogować usera i przekierować na stronę główną albo na profil, muszę zwrócić token
-              // z tej usługi. Póki co nie mam profilu użytkownika więc przekierowuję na stronę główną:
               .subscribe({
                 next: response => {
                   this.jwtService.setToken(response.token);
-                  this.router.navigate([this.REDIRECT_ROUT]); // strona główna
+                  this.router.navigate([this.REDIRECT_ROUT]);
                 },
                 error: err => {
                   this.registerError = true;
-                  // 30.0:
                   if (err.error.message) {
                     this.registerErrorMessage = err.error.message;
                   } else {
@@ -80,9 +74,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // 26.0
   private isPasswordIdentical(register: any): boolean {
-    // czy stringi są identyczne = = =
     if (register.password === register.repeatPassword) {
       this.registerError = false;
       return true;

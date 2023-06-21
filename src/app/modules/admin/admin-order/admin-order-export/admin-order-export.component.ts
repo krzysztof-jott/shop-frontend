@@ -12,12 +12,11 @@ export class AdminOrderExportComponent implements OnInit {
       formGroup!: FormGroup;
       statuses = [];
 
-      constructor(private formBuilder: FormBuilder,// jak jest formularz, to trzeba go zainicjalizować
+      constructor(private formBuilder: FormBuilder,
                   private adminOrderService: AdminOrderService) {
       }
 
       ngOnInit(): void {
-            // 15.1:
             this.getInitData();
             this.formGroup = this.formBuilder.group({
                   from: ['', Validators.required],
@@ -27,14 +26,12 @@ export class AdminOrderExportComponent implements OnInit {
       }
 
       export() {
-            // 15.2
             if (this.formGroup.valid) {
                   this.adminOrderService.exportOrders(
-                                  this.formGroup.get("from")?.value.toISOString(), // metoda bierze obiekt daty i formatuje go do stringa w postaci ISO
+                                  this.formGroup.get("from")?.value.toISOString(),
                                   this.formGroup.get("to")?.value.toISOString(),
                                   this.formGroup.get("orderStatus")?.value,
                           )
-                          // 21.1 dodaję bloba:
                           .subscribe(response => {
                                 let a = document.createElement('a');
                                 let objectUrl = URL.createObjectURL(response.body);
@@ -46,9 +43,8 @@ export class AdminOrderExportComponent implements OnInit {
             }
       }
 
-      // 15.0 kopiuję z admin order update:
       getInitData() {
-            this.adminOrderService.getInitData() // muszę zadeklarować tę metodę w serwisie
+            this.adminOrderService.getInitData()
                     .subscribe(data => this.statuses = data.orderStatuses);
       }
 }

@@ -1,6 +1,6 @@
 export interface AdminProduct {
-    id: number;
-    name: string;
-    price: number;
-    currency: string;
+	id: number;
+	name: string;
+	price: number;
+	currency: string;
 }

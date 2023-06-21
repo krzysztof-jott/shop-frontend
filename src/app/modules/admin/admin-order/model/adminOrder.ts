@@ -16,6 +16,5 @@ export interface AdminOrder {
 	email: string,
 	phone: string,
 	payment: AdminPayment,
-// 	11.0 dodaję pole:
 	orderLogs: Array<AdminOrderLog>;
 }

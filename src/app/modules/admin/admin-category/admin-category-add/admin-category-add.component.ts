@@ -6,39 +6,40 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { AdminMessageService } from "../../common/service/admin-message.service";
 
 @Component({
-    selector: 'app-admin-category-add',
-    templateUrl: './admin-category-add.component.html',
-    styleUrls: ['./admin-category-add.component.scss']
+      selector: 'app-admin-category-add',
+      templateUrl: './admin-category-add.component.html',
+      styleUrls: ['./admin-category-add.component.scss'],
+
 })
 export class AdminCategoryAddComponent implements OnInit {
 
-    categoryForm!: FormGroup;
+      categoryForm!: FormGroup;
 
-    constructor(private formBuilder: FormBuilder,
-                private adminCategoryService: AdminCategoryService,
-                private router: Router,
-                private snackBar: MatSnackBar,
-                private adminMessageService: AdminMessageService) {
-    }
+      constructor(private formBuilder: FormBuilder,
+                  private adminCategoryService: AdminCategoryService,
+                  private router: Router,
+                  private snackBar: MatSnackBar,
+                  private adminMessageService: AdminMessageService) {
+      }
 
-    ngOnInit(): void {
-        this.categoryForm = this.formBuilder.group({
-            name: ["", [Validators.required, Validators.minLength(4)]],
-            description: [""], // nie ma walidacji, bo nie jest to pole wymagane
-            slug: ["", [Validators.required, Validators.minLength(4)]],
-        });
-    }
+      ngOnInit(): void {
+            this.categoryForm = this.formBuilder.group({
+                  name: ["", [Validators.required, Validators.minLength(4)]],
+                  description: [""],
+                  slug: ["", [Validators.required, Validators.minLength(4)]],
+            });
+      }
 
-    submit() {
-        this.adminCategoryService.createCategory(this.categoryForm.value) // czyli te 3 pola powyżej
-                .subscribe({
-                    next: category => {
-                        this.router.navigate(["/admin/categories"])
-                                .then(() => this.snackBar.open('Kategoria została dodana', '', {duration: 3000}))
-                    },
-                    error: err => { // do obługi błędów potrzebuję adminMessageService:
-                        this.adminMessageService.addSpringErrors(err.error());
-                    }
-                });
-    }
+      submit() {
+            this.adminCategoryService.createCategory(this.categoryForm.value)
+                    .subscribe({
+                          next: category => {
+                                this.router.navigate(["/admin/categories"])
+                                        .then(() => this.snackBar.open('Kategoria została dodana', '', {duration: 3000}))
+                          },
+                          error: err => {
+                                this.adminMessageService.addSpringErrors(err.error());
+                          },
+                    });
+      }
 }

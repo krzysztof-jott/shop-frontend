@@ -13,7 +13,8 @@ export class AdminMessageComponent implements OnInit, OnDestroy {
 
   private clickCounter: number = 0;
 
-  constructor(private adminMessageService: AdminMessageService) { }
+  constructor(private adminMessageService: AdminMessageService) {
+  }
 
   ngOnInit(): void {
     this.adminMessageService.subject.subscribe(messages => {
@@ -25,14 +26,14 @@ export class AdminMessageComponent implements OnInit, OnDestroy {
 
   clearMessages() {
     this.messages = [];
-    this.adminMessageService.clear(); // wyczyściłem obie tablice
+    this.adminMessageService.clear();
   }
 
   ngOnDestroy(): void {
     this.adminMessageService.subject.unsubscribe();
   }
 
-  private timeoutCloseMessages() { // wydzielona metodę
+  private timeoutCloseMessages() {
     this.clickCounter++;
     setTimeout(() => {
       if (this.clickCounter == 1) {
